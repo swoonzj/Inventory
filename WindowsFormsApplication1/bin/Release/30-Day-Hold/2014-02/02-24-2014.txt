@@ -1,0 +1,3 @@
+    DNI?      NAME                     SYSTEM                   QUANTITY
+[ ]           10-Yard Fight            NES                      2    
+[ ] DNI       Conker''s Bad Fur Day    N64                      1    
