@@ -10,7 +10,7 @@ namespace Inventory
     {
         public ListView listView {get; private set;} 
         public Collection inventory {get; private set;}
-        private int lvType;
+        private ListViewType lvType;
         private string sourceTable;
         
         // Column sorting variables
@@ -26,11 +26,11 @@ namespace Inventory
         /// <param name="table">The name of the table to populate the ListView with. Should be a "TableName".</param>
         /// <param name="ListViewType">The ListViewType (as an int) to be represented in the ListView</param>
         /// <param name="CheckBoxes">Toggle appearance of checkboxes in ListView</param>
-        public DynamicListView(ListView lv, string table, int ListViewType, bool CheckBoxes)
+        public DynamicListView(ListView lv, string table, ListViewType lvType, bool CheckBoxes)
         {
             listView = lv;
             sourceTable = table;
-            lvType = ListViewType;
+            this.lvType = lvType;
             listView.CheckBoxes = CheckBoxes;
             listView.ColumnClick += listView_ColumnClick;
 
@@ -40,11 +40,11 @@ namespace Inventory
             PopulateList();
         }
 
-        public DynamicListView(ListView lv, Collection collection, int ListViewType, bool CheckBoxes)
+        public DynamicListView(ListView lv, Collection collection, ListViewType lvType, bool CheckBoxes)
         {
             listView = lv;
             inventory = collection;
-            lvType = ListViewType;
+            this.lvType = lvType;
             listView.CheckBoxes = CheckBoxes;
             listView.ColumnClick += listView_ColumnClick;
 
@@ -103,6 +103,14 @@ namespace Inventory
                 listView.Columns.Add(ListViewColumnNames.QUANTITY);
                 listView.Columns.Add(ListViewColumnNames.TRADE_CASH);
                 listView.Columns.Add(ListViewColumnNames.TRADE_CREDIT);
+            }
+
+            // For Customer Info Screen WaitList, show only Item name, system, Date Added
+            if (lvType == ListViewType.WAITLIST)
+            {
+                listView.Columns.Add(ListViewColumnNames.NAME);
+                listView.Columns.Add(ListViewColumnNames.SYSTEM);
+                listView.Columns.Add(ListViewColumnNames.DATE);
             }
         }
 
@@ -190,6 +198,8 @@ namespace Inventory
                 columnName = SQLTableColumnNames.UPC;
             if (columnText == ListViewColumnNames.DATE)
                 columnName = SQLTableColumnNames.DATE;
+            if (columnText == ListViewColumnNames.CUSTOMER_NAME)
+                columnName = SQLTableColumnNames.CUSTOMER_NAME;
 
             // If the same column was clicked, reverse sorting order
             if (sortBy == columnName)

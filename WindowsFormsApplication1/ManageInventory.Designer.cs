@@ -63,6 +63,7 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.inventoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportToCSVToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.inventoryLargeQuantitiesUsingPriceScannerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -77,7 +78,6 @@
             this.chkAutoPrintLabels = new System.Windows.Forms.CheckBox();
             this.btnClearSearchBox = new System.Windows.Forms.Button();
             this.lblTotalItems = new System.Windows.Forms.Label();
-            this.exportToCSVToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -264,7 +264,6 @@
             this.txtInventory.Name = "txtInventory";
             this.txtInventory.Size = new System.Drawing.Size(100, 23);
             this.txtInventory.TabIndex = 4;
-            this.txtInventory.TextChanged += new System.EventHandler(this.txtInventory_TextChanged);
             // 
             // txtPrice
             // 
@@ -395,6 +394,13 @@
             this.importToolStripMenuItem.Text = "Import...";
             this.importToolStripMenuItem.Click += new System.EventHandler(this.importToolStripMenuItem_Click);
             // 
+            // exportToCSVToolStripMenuItem
+            // 
+            this.exportToCSVToolStripMenuItem.Name = "exportToCSVToolStripMenuItem";
+            this.exportToCSVToolStripMenuItem.Size = new System.Drawing.Size(320, 22);
+            this.exportToCSVToolStripMenuItem.Text = "Export to .CSV";
+            this.exportToCSVToolStripMenuItem.Click += new System.EventHandler(this.exportToCSVToolStripMenuItem_Click);
+            // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
@@ -515,13 +521,6 @@
             this.lblTotalItems.Size = new System.Drawing.Size(35, 13);
             this.lblTotalItems.TabIndex = 101;
             this.lblTotalItems.Text = "label9";
-            // 
-            // exportToCSVToolStripMenuItem
-            // 
-            this.exportToCSVToolStripMenuItem.Name = "exportToCSVToolStripMenuItem";
-            this.exportToCSVToolStripMenuItem.Size = new System.Drawing.Size(320, 22);
-            this.exportToCSVToolStripMenuItem.Text = "Export to .CSV";
-            this.exportToCSVToolStripMenuItem.Click += new System.EventHandler(this.exportToCSVToolStripMenuItem_Click);
             // 
             // ManageInventory
             // 

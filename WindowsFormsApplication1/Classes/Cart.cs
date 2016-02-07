@@ -10,11 +10,11 @@ namespace Inventory
     {
         public Collection items = new Collection();
         private ListView listView;
-        int listViewType;
+        ListViewType listViewType;
 
         public decimal cartTotal { get; private set; }
 
-        public Cart(ListView lv, int listViewType)
+        public Cart(ListView lv, ListViewType listViewType)
         {
             listView = lv;
             this.listViewType = listViewType;
@@ -149,7 +149,7 @@ namespace Inventory
         public decimal cashTotal { get; private set; }
         public decimal creditTotal { get; private set; }
 
-        public TradeCart(ListView lv, int listViewType)
+        public TradeCart(ListView lv, ListViewType listViewType)
             : base(lv, listViewType) { }
 
         override public void UpdateTotals()

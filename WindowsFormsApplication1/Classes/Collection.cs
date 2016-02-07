@@ -211,7 +211,7 @@ namespace Inventory
         /// <param name="lv">ListView to populate</param>
         /// <param name="hideOutOfStock">True: Do not show items which have no quantity. False: Show all items.</param>
         /// <param name="listViewType">ListViewType indicating the column headers which are used</param>
-        public void PopulateListView(ListView lv, bool hideOutOfStock, int listViewType, string searchText = "")
+        public void PopulateListView(ListView lv, bool hideOutOfStock, ListViewType listViewType, string searchText = "")
         {
             // searchText cannot be null
             if (searchText == null) searchText = "";

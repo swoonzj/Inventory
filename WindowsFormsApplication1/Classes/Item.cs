@@ -4,6 +4,7 @@ namespace Inventory
 {
     public class Item
     {
+        public int ID { get; private set; }
         public string name { get; set; }
         public string system { get; set; }
         public decimal price { get; set; }

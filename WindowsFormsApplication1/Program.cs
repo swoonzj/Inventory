@@ -28,11 +28,16 @@ namespace Inventory
             Application.SetCompatibleTextRenderingDefault(false);
 
 
-            System.Media.SoundPlayer player = new System.Media.SoundPlayer(@".\WelcomeBack.wav");
-            player.Play();
+            //System.Media.SoundPlayer player = new System.Media.SoundPlayer(@".\WelcomeBack.wav");
+            //player.Play();
 
-            Application.Run(new POSinventory());
+            // Verify that tables exist
+            DBaccess.CheckTableExistance();
+
+            //Application.Run(new POSinventory());
             //Application.Run(new ManageInventory());
+            Application.Run(new CustomerInfoScreen(DBaccess.GetCustomer(1)));
+
         }
 
 

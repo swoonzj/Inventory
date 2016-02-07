@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LargeInventoryMode));
             this.btnClearSearchBox = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnUnselectAll = new System.Windows.Forms.Button();
@@ -249,8 +250,9 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.lvResults);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "LargeInventoryMode";
-            this.Text = "LargeInventoryMode";
+            this.Text = "Large Inventory Mode";
             this.ResumeLayout(false);
             this.PerformLayout();
 

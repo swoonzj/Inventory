@@ -408,14 +408,7 @@ namespace Inventory
                 Printer.PrintUPCLabel((Item)lvItem.Tag);
             }
         }
-
-        private void fromCSVToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            // Open import window
-
-            MessageBox.Show("Import Window Placeholder");          
-        }
-        
+                
         private void btnClearSearchBox_Click(object sender, EventArgs e)
         {
             txtSearch.Text = "";
@@ -424,11 +417,6 @@ namespace Inventory
         private void addLeadingZeroesToUPCsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DBaccess.AddLeadingZeroes();
-        }
-
-        private void txtInventory_TextChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void inventoryLargeQuantitiesUsingPriceScannerToolStripMenuItem_Click(object sender, EventArgs e)
@@ -446,6 +434,7 @@ namespace Inventory
 
         private void exportToCSVToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            // Create a new SaveFileDialog to get the filename of the file to export to
             SaveFileDialog saveCSV = new SaveFileDialog();
             saveCSV.Title = "Export Inventory to .CSV";
             saveCSV.Filter = "Comma Separated Values | *.csv";
@@ -456,10 +445,25 @@ namespace Inventory
                 ExportToCSV(saveCSV.FileName, TableNames.INVENTORY);
             }
         }
-
+        
+        /// <summary>
+        /// Exports the given table to a .CSV file
+        /// </summary>
+        /// <param name="filename">Name of the file to export to</param>
+        /// <param name="table">SQL table name containing data to export</param>
         private void ExportToCSV(string filename, string table)
         {
+            Collection inventory = DBaccess.SQLTableToCollection(table);
+            
+            System.IO.StreamWriter file = new System.IO.StreamWriter(filename);
 
+            foreach (Item item in inventory)
+            {
+                // .CSV format: Name, System, Price, Quantity, Trade_Cash, Trade_Credit, UPC
+                file.WriteLine("\"" + item.name + "\"," + "\"" + item.system + "\"," + item.price + "," + item.quantity + "," + item.tradeCash + "," + item.tradeCredit + "," + item.UPC + ",");
+            }
+
+            file.Close();
         }
     }
 }

@@ -10,8 +10,8 @@ namespace Inventory
 
     public static class DBaccess
     {
-        static SqlConnection connect = new SqlConnection(Properties.Settings.Default.StoreDatabaseConnectionString);
-        //static SqlConnection connect = new SqlConnection(Properties.Settings.Default.StoreDatabaseConnectionString2);
+        //static SqlConnection connect = new SqlConnection(Properties.Settings.Default.StoreDatabaseConnectionString); // For final version (store version)
+        static SqlConnection connect = new SqlConnection(Properties.Settings.Default.StoreDatabaseConnectionString2); // For testing
 
         // Export table to Comma Separated Values file (.csv)
         public static void ExportCSV(string filepath, string tblname)
@@ -725,14 +725,13 @@ namespace Inventory
         /// <returns>A new Item</returns>
         public static Item SQLReaderToItem(SqlDataReader reader)
         {
-            Item item = null;
-            item = new Item(reader[0].ToString(),
-                    reader[1].ToString(),
-                    reader[2].ToString(),
-                    reader[3].ToString(),
-                    reader[4].ToString(),
-                    reader[5].ToString(),
-                    reader[6].ToString());
+            Item item = new Item(reader[SQLtableColumnIndex_Inventory.NAME].ToString(),
+                    reader[SQLtableColumnIndex_Inventory.SYSTEM].ToString(),
+                    reader[SQLtableColumnIndex_Inventory.PRICE].ToString(),
+                    reader[SQLtableColumnIndex_Inventory.QUANTITY].ToString(),
+                    reader[SQLtableColumnIndex_Inventory.TRADE_CASH].ToString(),
+                    reader[SQLtableColumnIndex_Inventory.TRADE_CREDIT].ToString(),
+                    reader[SQLtableColumnIndex_Inventory.UPC].ToString());
 
             return item;
         }
@@ -1176,5 +1175,269 @@ namespace Inventory
             }
         }
 
+        /// <summary>
+        /// Verifies that required tables exist. If not, missing tables are created.
+        /// </summary>
+        public static void CheckTableExistance()
+        {
+            // Inventory
+            if (!DoesTableExist(TableNames.INVENTORY)) 
+            {
+                CreateInventoryTable();
+            }
+            // Customers
+            if (!DoesTableExist(TableNames.CUSTOMERS))
+            {
+                CreateCustomersTable();
+            }
+            // Wait List
+            if (!DoesTableExist(TableNames.WAIT_LIST))
+            {
+                CreateWaitingListTable();
+            }
+
+            // Transactions
+
+            // Variables
+            
+            // Auto-Print
+
+        }
+
+        /// <summary>
+        /// Determines whether a given SQL table exists in the current database
+        /// </summary>
+        /// <param name="tablename">Name of the SQL table to check</param>
+        /// <returns>True if the table exists, false otherwise</returns>
+        public static bool DoesTableExist(string tablename)
+        {
+            bool exists = false;
+            string command = "SELECT * FROM INFORMATION_SCHEMA.TABLES where TABLE_NAME = '" + tablename + "';";
+
+            SqlCommand cmd = new SqlCommand(command, connect);
+
+            try
+            {
+                connect.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    exists = true;
+                }
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error in DoesTableExist:\n\n" + ex.Message, "SQL Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            finally
+            {
+                connect.Close();
+            }
+
+            return exists;
+        }
+
+        public static void CreateCustomersTable()
+        {
+            // If Customers Table doesn't exist,
+            // Create table
+
+            //    CREATE TABLE tblCustomers
+            //(
+            //    [Customer_ID] INT NOT NULL PRIMARY KEY IDENTITY, 
+            //    [Name] NVARCHAR(50) NOT NULL, 
+            //    [Phone] NVARCHAR(50) NULL, 
+            //    [Email] NVARCHAR(MAX) NULL
+            //)
+        }
+
+        public static void CreateWaitingListTable()
+        {
+            //    CREATE TABLE [dbo].[tblWaitList] 
+            //(
+            //    [Wait_ID]     INT  IDENTITY (1, 1) NOT NULL,
+            //    [Customer_ID] INT  NOT NULL,
+            //    [Date]        DATE NOT NULL,
+            //    [Item_ID]        INT  NOT NULL,
+            //    PRIMARY KEY CLUSTERED ([Wait_ID] ASC),
+            //    FOREIGN KEY ([Customer_ID]) REFERENCES [dbo].[tblCustomers] ([Customer_ID]),
+            //    FOREIGN KEY ([Item_ID]) REFERENCES [dbo].[tblInventory] ([ID])
+            //);
+        }
+
+        public static void CreateInventoryTable()
+        {
+            //    CREATE TABLE [dbo].[tblInventory] 
+            //(
+            //    [ID]		  INT			 NOT NULL PRIMARY KEY IDENTITY,
+            //    [Name]        VARCHAR (MAX)  NULL,
+            //    [System]      NVARCHAR (50)  NULL,
+            //    [Price]       MONEY          NULL,
+            //    [Quantity]    INT            NULL,
+            //    [TradeCash]   MONEY          NULL,
+            //    [TradeCredit] MONEY          NULL,
+            //    [UPC]         NVARCHAR (MAX) NULL
+            //);
+        }
+
+#region WaitList Functions
+
+        /// <summary>
+        /// Given a customer, returns a collection of items in the customer's Wish List
+        /// </summary>
+        /// <param name="customer">Customer whose whish list is to be returned</param>
+        /// <returns>A Collection of items in the Customer's WaitList.</returns>
+        public static Collection GetCustomerWaitList(Customer customer)
+        {
+            Item item;
+            Collection collection = new Collection();
+
+            //  SELECT tblInventory.* 
+            //      FROM tblWaitList JOIN tblInventory
+            //      ON tblWaitList.item_id = tblInventory.ID
+            //      WHERE tblWaitList.customer_id = [CUSTOMER ID];
+            string command = "SELECT " + TableNames.INVENTORY +
+                                ".* FROM " + TableNames.WAIT_LIST +
+                                " JOIN " + TableNames.INVENTORY +
+                                " ON " + TableNames.WAIT_LIST + "." + SQLTableColumnNames.WAIT_LIST_ITEM_ID + " = " + TableNames.INVENTORY + "." + SQLTableColumnNames.ITEM_ID +
+                                " WHERE " + TableNames.WAIT_LIST + "." + SQLTableColumnNames.CUSTOMER_ID + " = " + customer.id + ";";
+            SqlCommand cmd = new SqlCommand(command, connect);
+
+            try
+            {
+                connect.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read() == true)
+                {
+                    item = SQLReaderToItem(reader);
+                    if (item != null)
+                        collection.AddItem(item);
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("ERROR IN GetCustomerWaitList:\n" + e.Message);
+            }
+            finally
+            {
+                connect.Close();
+            }
+
+            return collection; 
+        }
+
+        public static void AddToWaitList(Customer customer, Item item)
+        {
+            DateTime date = DateTime.Today;
+            string command = "INSERT INTO " + TableNames.WAIT_LIST + " VALUES(@CUSTOMER_ID, @DATE, @ITEM_ID)";
+
+            SqlCommand cmd = new SqlCommand(command, connect);
+            cmd.Parameters.Add("@CUSTOMER_ID", SqlDbType.Int).Value = customer.id;
+            cmd.Parameters.Add("@DATE", SqlDbType.Date).Value = date;
+            cmd.Parameters.Add("@ITEM_ID", SqlDbType.Int).Value = item.ID;
+
+            try
+            {
+                connect.Open();
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error in AddToWaitList():\n" + ex.Message, "Ruh Roh!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                connect.Close();
+            }
+        }
+
+
+#endregion
+
+#region Customer List Functions
+
+        /// <summary>
+        /// Adds the passed new customer to the Customer table, returns table ID of customer
+        /// </summary>
+        /// <param name="customer">The new customer to add to table</param>
+        /// <returns>Table ID of customer, or 0 if an error occured</returns>
+        public static int AddToCustomerList(Customer customer)
+        {
+            int result = 0;
+            string command = "INSERT INTO " + TableNames.CUSTOMERS + "OUTPUT INSERTED.id VALUES(@NAME, @PHONE, @EMAIL) ";
+
+            SqlCommand cmd = new SqlCommand(command, connect);
+            cmd.Parameters.Add("@NAME", SqlDbType.VarChar).Value = customer.name; 
+            cmd.Parameters.Add("@PHONE", SqlDbType.NVarChar).Value = customer.phoneNumber;
+            cmd.Parameters.Add("@EMAIL", SqlDbType.NVarChar).Value = customer.email;
+
+            try
+            {
+                connect.Open();
+                result = (int) cmd.ExecuteScalar();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error in AddToCustomerList():\n" + ex.Message, "Ruh Roh!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                connect.Close();
+            }
+
+            return result;
+        }
+
+        public static Customer GetCustomer(int customerID)
+        {
+            Customer customer = null;
+
+            string command = "SELECT * FROM " + TableNames.CUSTOMERS + " WHERE " + SQLTableColumnNames.CUSTOMER_ID + " = " + customerID;
+
+            SqlCommand cmd = new SqlCommand(command, connect);
+
+            try
+            {
+                connect.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read() == true)
+                {
+                    customer = CreateCustomerFromSQLReader(reader);
+                } 
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error in GetCustomer():\n" + ex.Message, "Ruh Roh!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                connect.Close();
+            }
+
+            return customer;
+        }
+
+        public static Customer CreateCustomerFromSQLReader(SqlDataReader reader)
+        {
+            Customer customer = new Customer(reader[SQLtableColumnIndex_Customers.NAME].ToString(),
+                                                reader[SQLtableColumnIndex_Customers.EMAIL].ToString(),
+                                                reader[SQLtableColumnIndex_Customers.PHONE].ToString(),
+                                                (int)reader[SQLtableColumnIndex_Customers.ID]);
+            
+            return customer;
+        }
+
+#endregion
+
+        
+    //    SELECT tblInventory.* 
+    //FROM tblWaitList JOIN tblInventory
+    //ON tblWaitList.item_id = tblInventory.ID
+    //WHERE tblWaitList.customer_id = 1;
     }
 }

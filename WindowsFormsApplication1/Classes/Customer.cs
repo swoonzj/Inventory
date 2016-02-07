@@ -3,45 +3,51 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Inventory.Classes
+namespace Inventory
 {
-    class Customer
+    public class Customer
     {
-        public string name { get; private set; }
-        public string email { get; private set; }
-        public string phoneNumber { get; private set; }
+        public int id { get; private set; }
+        public string name { get; set; }
+        public string email { get; set; }
+        public string phoneNumber { get; set; }
 
-        Collection wishList;
+        public Collection WaitList;
 
-        Customer(string name, string email = "", string phoneNumber = "")
+        public Customer(string name, string email = "", string phoneNumber = "", int id = -1)
         {
             this.name = name;
             this.email = email;
             this.phoneNumber = phoneNumber;
 
-            wishList = new Collection();
+            // If a valid Customer ID was passed, assign it.
+            if (id != -1)
+                this.id = id;
+
+            WaitList = new Collection();
         }
 
-        public void AddItemToWishList(Item item)
+        public void AddItemToWaitList(Item item)
         {
-            wishList.AddItem(item);
+            WaitList.AddItem(item);
         }
 
-        public void RemoveItemFromWishList(Item item)
+        public void RemoveItemFromWaitList(Item item)
         {
-            wishList.RemoveItem(item);
+            WaitList.RemoveItem(item);
         }
         /// <summary>
-        /// Returns a collection containing the items in a customer's WishList which are currently in stock
+        /// Returns a collection containing the items in a customer's WaitList which are currently in stock
         /// </summary>
-        /// <returns>A Collection of items on the customer's WishList which are in stock</returns>
-        public Collection WishListItemsInStock()
+        /// <returns>A Collection of items on the customer's WaitList which are in stock</returns>
+        public Collection WaitListItemsInStock()
         {
             
             Collection itemsInStock = new Collection();
 
-            foreach (Item item in wishList)
+            foreach (Item item in WaitList)
             {
+                // If a WaitList item is in stock, add to Collection itemsInStock
                 if (DBaccess.IsItemInStock(item) == true)
                 {
                     itemsInStock.AddItem(item);
@@ -49,6 +55,25 @@ namespace Inventory.Classes
             }
 
             return itemsInStock;
+        }
+
+        // FIGURE OUT HOW TO GET THE CUSTOMER'S SQL TABLE ID!!!!!!!
+
+
+
+        // Update Customer Info in DB.
+        public void saveDataToDB()
+        {
+            System.Windows.Forms.MessageBox.Show("Sup? This does nothing right now.");
+
+            try
+            {
+                
+            }
+            catch (Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show("Error in Customer.saveDataToDB():\n" + ex.Message);
+            }
         }
     }
 }

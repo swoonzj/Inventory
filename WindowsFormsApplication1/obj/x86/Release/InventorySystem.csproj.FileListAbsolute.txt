@@ -22,3 +22,4 @@ C:\Users\Zj\Documents\Programming\C# Tutorials\1\WindowsFormsApplication1\Window
 C:\Users\Zj\Documents\Programming\C# Tutorials\1\WindowsFormsApplication1\WindowsFormsApplication1\obj\x86\Release\Inventory.UnknownUPCHandler.resources
 C:\Users\Zj\Documents\Programming\C# Tutorials\1\WindowsFormsApplication1\WindowsFormsApplication1\obj\x86\Release\Inventory.ImportItems.resources
 C:\Users\Zj\Documents\Programming\C# Tutorials\1\WindowsFormsApplication1\WindowsFormsApplication1\obj\x86\Release\Inventory.LargeInventoryMode.resources
+C:\Users\Zj\Documents\Programming\C# Tutorials\1\WindowsFormsApplication1\WindowsFormsApplication1\obj\x86\Release\Inventory.CustomerInfoScreen.resources
