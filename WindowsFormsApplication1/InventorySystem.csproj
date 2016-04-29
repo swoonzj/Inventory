@@ -71,117 +71,132 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="30DayHold.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="30DayHold.Designer.cs">
-      <DependentUpon>30DayHold.cs</DependentUpon>
-    </Compile>
     <Compile Include="Classes\Cart.cs" />
     <Compile Include="Classes\Collection.cs" />
     <Compile Include="Classes\Customer.cs" />
     <Compile Include="Classes\DatabaseAccess.cs" />
     <Compile Include="Classes\DynamicListview.cs" />
-    <Compile Include="CustomerInfoScreen.cs">
+    <Compile Include="Classes\Item.cs" />
+    <Compile Include="Forms\30DayHold.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CustomerInfoScreen.Designer.cs">
+    <Compile Include="Forms\30DayHold.Designer.cs">
+      <DependentUpon>30DayHold.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CustomerInfoScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CustomerInfoScreen.Designer.cs">
       <DependentUpon>CustomerInfoScreen.cs</DependentUpon>
     </Compile>
-    <Compile Include="EditTradeCart.cs">
+    <Compile Include="Forms\CustomerTable.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="EditTradeCart.Designer.cs">
-      <DependentUpon>EditTradeCart.cs</DependentUpon>
+    <Compile Include="Forms\CustomerTable.Designer.cs">
+      <DependentUpon>CustomerTable.cs</DependentUpon>
     </Compile>
-    <Compile Include="Classes\Item.cs" />
-    <Compile Include="ImportItems.cs">
+    <Compile Include="Forms\EditCart.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ImportItems.Designer.cs">
-      <DependentUpon>ImportItems.cs</DependentUpon>
-    </Compile>
-    <Compile Include="LargeInventoryMode.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="LargeInventoryMode.Designer.cs">
-      <DependentUpon>LargeInventoryMode.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ManageInventory.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ManageInventory.Designer.cs">
-      <DependentUpon>ManageInventory.cs</DependentUpon>
-    </Compile>
-    <Compile Include="EditCart.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="EditCart.Designer.cs">
+    <Compile Include="Forms\EditCart.Designer.cs">
       <DependentUpon>EditCart.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormatCSV.cs">
+    <Compile Include="Forms\EditTradeCart.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormatCSV.Designer.cs">
+    <Compile Include="Forms\EditTradeCart.Designer.cs">
+      <DependentUpon>EditTradeCart.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormatCSV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormatCSV.Designer.cs">
       <DependentUpon>FormatCSV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ImportItems.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ImportItems.Designer.cs">
+      <DependentUpon>ImportItems.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\LargeInventoryMode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LargeInventoryMode.Designer.cs">
+      <DependentUpon>LargeInventoryMode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ManageInventory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ManageInventory.Designer.cs">
+      <DependentUpon>ManageInventory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\New Item.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\New Item.Designer.cs">
+      <DependentUpon>New Item.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\POSinventory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\POSinventory.Designer.cs">
+      <DependentUpon>POSinventory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\UnknownUPCHandler.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\UnknownUPCHandler.Designer.cs">
+      <DependentUpon>UnknownUPCHandler.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\View Transactions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\View Transactions.Designer.cs">
+      <DependentUpon>View Transactions.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\FormVariables.cs" />
     <Compile Include="Classes\MiscClasses.cs" />
-    <Compile Include="New Item.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="New Item.Designer.cs">
-      <DependentUpon>New Item.cs</DependentUpon>
-    </Compile>
-    <Compile Include="POSinventory.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="POSinventory.Designer.cs">
-      <DependentUpon>POSinventory.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UnknownUPCHandler.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UnknownUPCHandler.Designer.cs">
-      <DependentUpon>UnknownUPCHandler.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View Transactions.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View Transactions.Designer.cs">
-      <DependentUpon>View Transactions.cs</DependentUpon>
-    </Compile>
-    <EmbeddedResource Include="30DayHold.resx">
+    <EmbeddedResource Include="Forms\30DayHold.resx">
       <DependentUpon>30DayHold.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CustomerInfoScreen.resx">
+    <EmbeddedResource Include="Forms\CustomerInfoScreen.resx">
       <DependentUpon>CustomerInfoScreen.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EditTradeCart.resx">
-      <DependentUpon>EditTradeCart.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\CustomerTable.resx">
+      <DependentUpon>CustomerTable.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ImportItems.resx">
-      <DependentUpon>ImportItems.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="LargeInventoryMode.resx">
-      <DependentUpon>LargeInventoryMode.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ManageInventory.resx">
-      <DependentUpon>ManageInventory.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="EditCart.resx">
+    <EmbeddedResource Include="Forms\EditCart.resx">
       <DependentUpon>EditCart.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormatCSV.resx">
+    <EmbeddedResource Include="Forms\EditTradeCart.resx">
+      <DependentUpon>EditTradeCart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormatCSV.resx">
       <DependentUpon>FormatCSV.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="New Item.resx">
+    <EmbeddedResource Include="Forms\ImportItems.resx">
+      <DependentUpon>ImportItems.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LargeInventoryMode.resx">
+      <DependentUpon>LargeInventoryMode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ManageInventory.resx">
+      <DependentUpon>ManageInventory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\New Item.resx">
       <DependentUpon>New Item.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="POSinventory.resx">
+    <EmbeddedResource Include="Forms\POSinventory.resx">
       <DependentUpon>POSinventory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\UnknownUPCHandler.resx">
+      <DependentUpon>UnknownUPCHandler.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\View Transactions.resx">
+      <DependentUpon>View Transactions.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -193,12 +208,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="UnknownUPCHandler.resx">
-      <DependentUpon>UnknownUPCHandler.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View Transactions.resx">
-      <DependentUpon>View Transactions.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

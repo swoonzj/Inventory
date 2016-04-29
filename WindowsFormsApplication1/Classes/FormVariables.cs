@@ -102,7 +102,8 @@ namespace Inventory
         MANAGEMENT = 3,
         _30DAYHOLD = 4,
         TRANSACTION = 5,
-        WAITLIST = 6
+        WAITLIST = 6,
+        CUSTOMERLIST = 7
     };
 
     //public static class ListViewType

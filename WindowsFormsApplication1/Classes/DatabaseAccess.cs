@@ -1432,6 +1432,10 @@ namespace Inventory
             return customer;
         }
 
+        public static void UpdateCustomer(Customer customer)
+        {
+
+        }
 #endregion
 
         

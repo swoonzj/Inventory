@@ -5,6 +5,9 @@ using System.Windows.Forms;
 
 namespace Inventory
 {
+    /// <summary>
+    /// A collection of Items
+    /// </summary>
     public class Collection : IEnumerable
     {
         public ArrayList items { get; set; }
@@ -66,7 +69,7 @@ namespace Inventory
         {
             items.Add(item);
         }
-
+        
         /// <summary>
         /// Adds item (quantity = 1) containing the provided UPC to the collection 
         /// </summary>

@@ -7,7 +7,7 @@ namespace Inventory
 {
     public class Customer
     {
-        public int id { get; private set; }
+        public int id { get; private set; } // If not retrieved from DB, given ID of -1
         public string name { get; set; }
         public string email { get; set; }
         public string phoneNumber { get; set; }
@@ -68,6 +68,11 @@ namespace Inventory
 
             try
             {
+                // If the Customer has a valid table ID, save info to DB.
+                if (id != -1)
+                {
+                    //Save info
+                }
                 
             }
             catch (Exception ex)

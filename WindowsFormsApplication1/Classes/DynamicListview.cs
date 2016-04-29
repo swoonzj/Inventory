@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
 namespace Inventory
 {
@@ -111,6 +107,14 @@ namespace Inventory
                 listView.Columns.Add(ListViewColumnNames.NAME);
                 listView.Columns.Add(ListViewColumnNames.SYSTEM);
                 listView.Columns.Add(ListViewColumnNames.DATE);
+            }
+
+            // For Customer Info, show customer name, phone, email
+            if (lvType == ListViewType.CUSTOMERLIST)
+            {
+                listView.Columns.Add(ListViewColumnNames.NAME);
+                listView.Columns.Add(ListViewColumnNames.PHONE_NUMBER);
+                listView.Columns.Add(ListViewColumnNames.EMAIL);
             }
         }
 
