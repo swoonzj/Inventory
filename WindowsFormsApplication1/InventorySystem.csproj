@@ -74,6 +74,7 @@
     <Compile Include="Classes\Cart.cs" />
     <Compile Include="Classes\Collection.cs" />
     <Compile Include="Classes\Customer.cs" />
+    <Compile Include="Classes\CustomerCollection.cs" />
     <Compile Include="Classes\DatabaseAccess.cs" />
     <Compile Include="Classes\DynamicListview.cs" />
     <Compile Include="Classes\Item.cs" />

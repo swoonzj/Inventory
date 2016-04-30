@@ -19,10 +19,7 @@ namespace Inventory
             this.name = name;
             this.email = email;
             this.phoneNumber = phoneNumber;
-
-            // If a valid Customer ID was passed, assign it.
-            if (id != -1)
-                this.id = id;
+            this.id = id;
 
             WaitList = new Collection();
         }
@@ -64,14 +61,12 @@ namespace Inventory
         // Update Customer Info in DB.
         public void saveDataToDB()
         {
-            System.Windows.Forms.MessageBox.Show("Sup? This does nothing right now.");
-
             try
             {
-                // If the Customer has a valid table ID, save info to DB.
-                if (id != -1)
+                // If the Customer does not have a valid table ID, save info to DB, retrieve ID.
+                if (id == -1)
                 {
-                    //Save info
+                    this.id = DBaccess.AddToCustomerList(this);
                 }
                 
             }

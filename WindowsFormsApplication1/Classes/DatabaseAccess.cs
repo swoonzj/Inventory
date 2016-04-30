@@ -1283,6 +1283,15 @@ namespace Inventory
             //);
         }
 
+        public static void CreateUPCTable()
+        {
+            //    CREATE TABLE [dbo].[tblUPC] 
+            //(
+            //    [ID]		  INT			 NOT NULL PRIMARY KEY IDENTITY,
+            //    [UPC]        VARCHAR (MAX)  NULL
+            //);
+        }
+
 #region WaitList Functions
 
         /// <summary>
@@ -1368,7 +1377,7 @@ namespace Inventory
         public static int AddToCustomerList(Customer customer)
         {
             int result = 0;
-            string command = "INSERT INTO " + TableNames.CUSTOMERS + "OUTPUT INSERTED.id VALUES(@NAME, @PHONE, @EMAIL) ";
+            string command = "INSERT INTO " + TableNames.CUSTOMERS + " OUTPUT INSERTED.customer_id VALUES(@NAME, @PHONE, @EMAIL) ";
 
             SqlCommand cmd = new SqlCommand(command, connect);
             cmd.Parameters.Add("@NAME", SqlDbType.VarChar).Value = customer.name; 

@@ -36,11 +36,16 @@ namespace Inventory
 
             //Application.Run(new POSinventory());
             //Application.Run(new ManageInventory());
-            Application.Run(new CustomerInfoScreen(DBaccess.GetCustomer(1)));
-
+            //Application.Run(new CustomerInfoScreen(DBaccess.GetCustomer(1)));
+            CustomerTest();
         }
 
-
+        static void CustomerTest()
+        {
+            Customer customer = new Customer("Steve", "123@email.com", "555-5555");
+            customer.saveDataToDB();
+            MessageBox.Show(customer.name + ": " + customer.id);
+        }
     }
 }
      
