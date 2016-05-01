@@ -24,3 +24,22 @@ C:\Users\Zj\Documents\Programming\C# Tutorials\1\WindowsFormsApplication1\Window
 C:\Users\Zj\Documents\Programming\C# Tutorials\1\WindowsFormsApplication1\WindowsFormsApplication1\bin\Release\Inventory.pdb
 C:\Users\Zj\Documents\Programming\C# Tutorials\1\WindowsFormsApplication1\WindowsFormsApplication1\obj\x86\Release\Inventory.exe
 C:\Users\Zj\Documents\Programming\C# Tutorials\1\WindowsFormsApplication1\WindowsFormsApplication1\obj\x86\Release\Inventory.pdb
+C:\Users\Zj\Documents\Programming\Inventory\Inventory\WindowsFormsApplication1\bin\Release\Inventory.exe.config
+C:\Users\Zj\Documents\Programming\Inventory\Inventory\WindowsFormsApplication1\obj\x86\Release\Inventory.exe
+C:\Users\Zj\Documents\Programming\Inventory\Inventory\WindowsFormsApplication1\obj\x86\Release\Inventory.pdb
+C:\Users\Zj\Documents\Programming\Inventory\Inventory\WindowsFormsApplication1\obj\x86\Release\InventorySystem.csprojResolveAssemblyReference.cache
+C:\Users\Zj\Documents\Programming\Inventory\Inventory\WindowsFormsApplication1\obj\x86\Release\Inventory._30DayHold.resources
+C:\Users\Zj\Documents\Programming\Inventory\Inventory\WindowsFormsApplication1\obj\x86\Release\Inventory.CustomerInfoScreen.resources
+C:\Users\Zj\Documents\Programming\Inventory\Inventory\WindowsFormsApplication1\obj\x86\Release\Inventory.Forms.CustomerTable.resources
+C:\Users\Zj\Documents\Programming\Inventory\Inventory\WindowsFormsApplication1\obj\x86\Release\Inventory.EditCart.resources
+C:\Users\Zj\Documents\Programming\Inventory\Inventory\WindowsFormsApplication1\obj\x86\Release\Inventory.EditTradeCart.resources
+C:\Users\Zj\Documents\Programming\Inventory\Inventory\WindowsFormsApplication1\obj\x86\Release\Inventory.FormatCSV.resources
+C:\Users\Zj\Documents\Programming\Inventory\Inventory\WindowsFormsApplication1\obj\x86\Release\Inventory.ImportItems.resources
+C:\Users\Zj\Documents\Programming\Inventory\Inventory\WindowsFormsApplication1\obj\x86\Release\Inventory.LargeInventoryMode.resources
+C:\Users\Zj\Documents\Programming\Inventory\Inventory\WindowsFormsApplication1\obj\x86\Release\Inventory.ManageInventory.resources
+C:\Users\Zj\Documents\Programming\Inventory\Inventory\WindowsFormsApplication1\obj\x86\Release\Inventory.NewItem.resources
+C:\Users\Zj\Documents\Programming\Inventory\Inventory\WindowsFormsApplication1\obj\x86\Release\Inventory.POSinventory.resources
+C:\Users\Zj\Documents\Programming\Inventory\Inventory\WindowsFormsApplication1\obj\x86\Release\Inventory.UnknownUPCHandler.resources
+C:\Users\Zj\Documents\Programming\Inventory\Inventory\WindowsFormsApplication1\obj\x86\Release\Inventory.View_Transactions.resources
+C:\Users\Zj\Documents\Programming\Inventory\Inventory\WindowsFormsApplication1\obj\x86\Release\Inventory.Properties.Resources.resources
+C:\Users\Zj\Documents\Programming\Inventory\Inventory\WindowsFormsApplication1\obj\x86\Release\InventorySystem.csproj.GenerateResource.Cache

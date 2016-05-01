@@ -1242,45 +1242,46 @@ namespace Inventory
 
         public static void CreateCustomersTable()
         {
-            // If Customers Table doesn't exist,
-            // Create table
-
-            //    CREATE TABLE tblCustomers
-            //(
-            //    [Customer_ID] INT NOT NULL PRIMARY KEY IDENTITY, 
-            //    [Name] NVARCHAR(50) NOT NULL, 
-            //    [Phone] NVARCHAR(50) NULL, 
-            //    [Email] NVARCHAR(MAX) NULL
-            //)
+             //If Customers Table doesn't exist,
+             //Create table
+            string command = "CREATE TABLE tblCustomers([Customer_ID] INT NOT NULL PRIMARY KEY IDENTITY, [Name] NVARCHAR(50) NOT NULL, [Phone] NVARCHAR(50) NULL, [Email] NVARCHAR(MAX) NULL)";
+            
+            SqlCommand cmd = new SqlCommand(command);
+            CreateSQLTable(cmd);
         }
 
         public static void CreateWaitingListTable()
         {
-            //    CREATE TABLE [dbo].[tblWaitList] 
-            //(
-            //    [Wait_ID]     INT  IDENTITY (1, 1) NOT NULL,
-            //    [Customer_ID] INT  NOT NULL,
-            //    [Date]        DATE NOT NULL,
-            //    [Item_ID]        INT  NOT NULL,
-            //    PRIMARY KEY CLUSTERED ([Wait_ID] ASC),
-            //    FOREIGN KEY ([Customer_ID]) REFERENCES [dbo].[tblCustomers] ([Customer_ID]),
-            //    FOREIGN KEY ([Item_ID]) REFERENCES [dbo].[tblInventory] ([ID])
-            //);
+                string command = "CREATE TABLE [dbo].[tblWaitList] ([Wait_ID]     INT  IDENTITY (1, 1) NOT NULL,[Customer_ID] INT  NOT NULL,[Date]        DATE NOT NULL,[Item_ID]        INT  NOT NULL,PRIMARY KEY CLUSTERED ([Wait_ID] ASC),FOREIGN KEY ([Customer_ID]) REFERENCES [dbo].[tblCustomers] ([Customer_ID]),FOREIGN KEY ([Item_ID]) REFERENCES [dbo].[tblInventory] ([ID]))";
+            
+            SqlCommand cmd = new SqlCommand(command);
+            CreateSQLTable(cmd);
         }
 
         public static void CreateInventoryTable()
         {
-            //    CREATE TABLE [dbo].[tblInventory] 
-            //(
-            //    [ID]		  INT			 NOT NULL PRIMARY KEY IDENTITY,
-            //    [Name]        VARCHAR (MAX)  NULL,
-            //    [System]      NVARCHAR (50)  NULL,
-            //    [Price]       MONEY          NULL,
-            //    [Quantity]    INT            NULL,
-            //    [TradeCash]   MONEY          NULL,
-            //    [TradeCredit] MONEY          NULL,
-            //    [UPC]         NVARCHAR (MAX) NULL
-            //);
+                string command = "CREATE TABLE [dbo].[tblInventory]([ID]		  INT			 NOT NULL PRIMARY KEY IDENTITY,[Name]        VARCHAR (MAX)  NULL,[System]      NVARCHAR (50)  NULL,[Price]       MONEY          NULL,[Quantity]    INT            NULL,[TradeCash]   MONEY          NULL,[TradeCredit] MONEY          NULL,[UPC]         NVARCHAR (MAX) NULL)";
+            
+            SqlCommand cmd = new SqlCommand(command);
+            CreateSQLTable(cmd);
+        }
+
+        private static void CreateSQLTable(SqlCommand cmd)
+        {
+            // execute command  & close connection
+            try
+            {
+                connect.Open();
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("ERROR IN CreateSQLTable():\n" + e.Message);
+            }
+            finally
+            {
+                connect.Close();
+            }
         }
 
         public static void CreateUPCTable()
