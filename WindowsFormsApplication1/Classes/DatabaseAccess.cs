@@ -10,8 +10,8 @@ namespace Inventory
 
     public static class DBaccess
     {
-        static SqlConnection connect = new SqlConnection(Properties.Settings.Default.StoreDatabaseConnectionString);
-        //static SqlConnection connect = new SqlConnection(Properties.Settings.Default.StoreDatabaseConnectionString2);
+        //static SqlConnection connect = new SqlConnection(Properties.Settings.Default.StoreDatabaseConnectionString); // For final version (store version)
+        static SqlConnection connect = new SqlConnection(Properties.Settings.Default.StoreDatabaseConnectionString2); // For testing
 
         // Export table to Comma Separated Values file (.csv)
         public static void ExportCSV(string filepath, string tblname)

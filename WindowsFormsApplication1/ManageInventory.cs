@@ -456,10 +456,25 @@ namespace Inventory
                 ExportToCSV(saveCSV.FileName, TableNames.INVENTORY);
             }
         }
-
+        
+        /// <summary>
+        /// Exports the given table to a .CSV file
+        /// </summary>
+        /// <param name="filename">Name of the file to export to</param>
+        /// <param name="table">SQL table name containing data to export</param>
         private void ExportToCSV(string filename, string table)
         {
+            Collection inventory = DBaccess.SQLTableToCollection(table);
+            
+            System.IO.StreamWriter file = new System.IO.StreamWriter(filename);
 
+            foreach (Item item in inventory)
+            {
+                // .CSV format: Name, System, Price, Quantity, Trade_Cash, Trade_Credit, UPC
+                file.WriteLine("\"" + item.name + "\"," + "\"" + item.system + "\"," + item.price + "," + item.quantity + "," + item.tradeCash + "," + item.tradeCredit + "," + item.UPC + ",");
+            }
+
+            file.Close();
         }
     }
 }

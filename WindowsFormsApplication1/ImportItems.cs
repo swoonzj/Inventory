@@ -24,8 +24,9 @@ namespace Inventory
             {
                 OpenCSV();
             }
-            catch
+            catch (Exception ex)
             {
+                MessageBox.Show("Error in ImportItems():\n" + ex.Message, "Error Importing", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
