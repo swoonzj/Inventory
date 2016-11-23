@@ -66,5 +66,10 @@ namespace Inventory
         {
             customers.Add(customer);
         }
+
+        public void RemoveCustomer(Customer customer)
+        {
+            customers.Remove(customer);
+        }
     }
 }
