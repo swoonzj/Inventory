@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Inventory
 {
@@ -10,9 +11,23 @@ namespace Inventory
         public int quantity { get; set; }
         public decimal tradeCash { get; set; }
         public decimal tradeCredit { get; set; }
-        public string UPC { get; set; }
+        public List<string> UPC { get; set; }
 
-        public Item(string name, string system, decimal price, int quantity, decimal cash, decimal credit, string upc)
+        public string SQLid { get; private set; } // Unique id set by SQL database
+
+        public Item(string name, string system, decimal price, int quantity, decimal cash, decimal credit, string upc, string SQLid = "0")
+        {
+            this.name = name;
+            this.system = system;
+            this.price = price;
+            this.quantity = quantity;
+            this.tradeCash = cash;
+            this.tradeCredit = credit;
+            this.UPC.Add(upc);
+            this.SQLid = SQLid;
+        }
+
+        public Item(string name, string system, decimal price, int quantity, decimal cash, decimal credit, List<string> upc, string SQLid = "0")
         {
             this.name = name;
             this.system = system;
@@ -21,9 +36,10 @@ namespace Inventory
             this.tradeCash = cash;
             this.tradeCredit = credit;
             this.UPC = upc;
+            this.SQLid = SQLid;
         }
 
-        public Item(string name, string system = "", string price = "0", string quantity = "0", string cash = "0", string credit = "0", string upc = "0")
+        public Item(string name, string system = "", string price = "0", string quantity = "0", string cash = "0", string credit = "0", string upc = "0", string SQLid = "0")
         {
             this.name = name;
             this.system = system;
@@ -31,12 +47,14 @@ namespace Inventory
             this.quantity = Convert.ToInt32(quantity);
             this.tradeCash = Convert.ToDecimal(cash);
             this.tradeCredit = Convert.ToDecimal(credit);
-            this.UPC = upc;
+            this.UPC.Add(upc);
+            this.SQLid = SQLid;
         }
 
-        public void AddToDatabase(string tablename)
+        public void AddToInventory()
         {
-            DBaccess.AddToTable(tablename, name, system, price, quantity, tradeCash, tradeCredit, UPC);
+            DBaccess.AddToTable(this);
+            this.SQLid = DBaccess.GetItemID(this);
         }
 
         public void RemoveFromDatabase(string tablename)
@@ -114,32 +132,36 @@ namespace Inventory
         }
     }
 
-    public class HoldItem : Item
-    {
-        public DateTime dateIn { get; set; }
-        public DateTime dateOut { get; set; }
+    // For 30 Day Hold (unused)
+    //public class HoldItem : Item
+    //{
+    //    public DateTime dateIn { get; set; }
+    //    public DateTime dateOut { get; set; }
 
-        public HoldItem(string name, string system, decimal price, int quantity, decimal cash, decimal credit, string upc, DateTime date)
-            : base(name, system, price, quantity, cash, credit, upc)
-        {
-            dateIn = date;
-            dateOut = dateIn.AddDays(30);
-        }
+    //    public HoldItem(string name, string system, decimal price, int quantity, decimal cash, decimal credit, string upc, DateTime date)
+    //        : base(name, system, price, quantity, cash, credit, upc)
+    //    {
+    //        dateIn = date;
+    //        dateOut = dateIn.AddDays(30);
+    //    }
 
-        public HoldItem(string name, string system, string price, string quantity, string cash, string credit, string upc, string date)
-            : base(name, system, price, quantity, cash, credit, upc)
-        {
-            dateIn = Convert.ToDateTime(date);
-            dateOut = dateIn.AddDays(30);
-        }
+    //    public HoldItem(string name, string system, string price, string quantity, string cash, string credit, string upc, string date)
+    //        : base(name, system, price, quantity, cash, credit, upc)
+    //    {
+    //        dateIn = Convert.ToDateTime(date);
+    //        dateOut = dateIn.AddDays(30);
+    //    }
 
-        new public HoldItem Clone()
-        {
-            return new HoldItem(name, system, price, quantity, tradeCash, tradeCredit, UPC, dateIn);
-        }
+    //    new public HoldItem Clone()
+    //    {
+    //        return new HoldItem(name, system, price, quantity, tradeCash, tradeCredit, UPC, dateIn);
+    //    }
 
-    }
+    //}
 
+    // ====================================|
+    // Class for dealing with transactions |
+    // ====================================|
     public class TransactionItem : Item
     {
         public int transactionNumber { get; set; }
@@ -160,6 +182,14 @@ namespace Inventory
             this.transactionType = transactionType;
             this.date = Convert.ToDateTime(date);
             this.transactionNumber = Convert.ToInt32(transactionNumber);
+        }
+
+        public TransactionItem(string name, string system, decimal price, int quantity, List<string> upc, string transactionType, int transactionNumber, DateTime date)
+            : base(name, system, price, quantity, 0, 0, upc)
+        {
+            this.transactionType = transactionType;
+            this.date = date;
+            this.transactionNumber = transactionNumber;
         }
 
         new public TransactionItem Clone()

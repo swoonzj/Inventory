@@ -63,6 +63,7 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.inventoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportToCSVToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.inventoryLargeQuantitiesUsingPriceScannerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -77,7 +78,8 @@
             this.chkAutoPrintLabels = new System.Windows.Forms.CheckBox();
             this.btnClearSearchBox = new System.Windows.Forms.Button();
             this.lblTotalItems = new System.Windows.Forms.Label();
-            this.exportToCSVToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lvUPC = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -85,9 +87,9 @@
             // 
             this.butSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.butSave.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.butSave.Location = new System.Drawing.Point(1085, 573);
+            this.butSave.Location = new System.Drawing.Point(1085, 596);
             this.butSave.Name = "butSave";
-            this.butSave.Size = new System.Drawing.Size(131, 76);
+            this.butSave.Size = new System.Drawing.Size(117, 53);
             this.butSave.TabIndex = 8;
             this.butSave.Text = "Save Changes";
             this.butSave.UseVisualStyleBackColor = true;
@@ -177,7 +179,7 @@
             this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(1119, 164);
+            this.label6.Location = new System.Drawing.Point(1117, 86);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(55, 19);
             this.label6.TabIndex = 25;
@@ -188,7 +190,7 @@
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(1029, 365);
+            this.label5.Location = new System.Drawing.Point(1027, 287);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(147, 19);
             this.label5.TabIndex = 24;
@@ -199,7 +201,7 @@
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(1081, 323);
+            this.label4.Location = new System.Drawing.Point(1079, 245);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(95, 19);
             this.label4.TabIndex = 23;
@@ -210,7 +212,7 @@
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(1088, 284);
+            this.label3.Location = new System.Drawing.Point(1086, 206);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(86, 19);
             this.label3.TabIndex = 22;
@@ -221,7 +223,7 @@
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(1123, 243);
+            this.label2.Location = new System.Drawing.Point(1121, 165);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(51, 19);
             this.label2.TabIndex = 21;
@@ -232,7 +234,7 @@
             this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(1110, 204);
+            this.label7.Location = new System.Drawing.Point(1108, 126);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(64, 19);
             this.label7.TabIndex = 20;
@@ -242,7 +244,7 @@
             // 
             this.txtCredit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtCredit.Font = new System.Drawing.Font("Cambria", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCredit.Location = new System.Drawing.Point(1180, 361);
+            this.txtCredit.Location = new System.Drawing.Point(1178, 283);
             this.txtCredit.Name = "txtCredit";
             this.txtCredit.Size = new System.Drawing.Size(100, 23);
             this.txtCredit.TabIndex = 6;
@@ -251,7 +253,7 @@
             // 
             this.txtCash.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtCash.Font = new System.Drawing.Font("Cambria", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCash.Location = new System.Drawing.Point(1180, 319);
+            this.txtCash.Location = new System.Drawing.Point(1178, 241);
             this.txtCash.Name = "txtCash";
             this.txtCash.Size = new System.Drawing.Size(100, 23);
             this.txtCash.TabIndex = 5;
@@ -260,7 +262,7 @@
             // 
             this.txtInventory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtInventory.Font = new System.Drawing.Font("Cambria", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtInventory.Location = new System.Drawing.Point(1180, 280);
+            this.txtInventory.Location = new System.Drawing.Point(1178, 202);
             this.txtInventory.Name = "txtInventory";
             this.txtInventory.Size = new System.Drawing.Size(100, 23);
             this.txtInventory.TabIndex = 4;
@@ -270,7 +272,7 @@
             // 
             this.txtPrice.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtPrice.Font = new System.Drawing.Font("Cambria", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPrice.Location = new System.Drawing.Point(1180, 239);
+            this.txtPrice.Location = new System.Drawing.Point(1178, 161);
             this.txtPrice.Name = "txtPrice";
             this.txtPrice.Size = new System.Drawing.Size(100, 23);
             this.txtPrice.TabIndex = 3;
@@ -279,7 +281,7 @@
             // 
             this.txtSystem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSystem.Font = new System.Drawing.Font("Cambria", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSystem.Location = new System.Drawing.Point(1180, 200);
+            this.txtSystem.Location = new System.Drawing.Point(1178, 122);
             this.txtSystem.Name = "txtSystem";
             this.txtSystem.Size = new System.Drawing.Size(194, 23);
             this.txtSystem.TabIndex = 2;
@@ -288,7 +290,7 @@
             // 
             this.txtName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtName.Font = new System.Drawing.Font("Cambria", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtName.Location = new System.Drawing.Point(1180, 160);
+            this.txtName.Location = new System.Drawing.Point(1178, 82);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(194, 23);
             this.txtName.TabIndex = 1;
@@ -332,9 +334,9 @@
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancel.Location = new System.Drawing.Point(1258, 583);
+            this.btnCancel.Location = new System.Drawing.Point(1249, 596);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(110, 56);
+            this.btnCancel.Size = new System.Drawing.Size(117, 53);
             this.btnCancel.TabIndex = 51;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -350,7 +352,7 @@
             this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(1135, 407);
+            this.label8.Location = new System.Drawing.Point(1133, 329);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(39, 19);
             this.label8.TabIndex = 53;
@@ -360,7 +362,7 @@
             // 
             this.txtUPC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtUPC.Font = new System.Drawing.Font("Cambria", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtUPC.Location = new System.Drawing.Point(1180, 403);
+            this.txtUPC.Location = new System.Drawing.Point(1178, 325);
             this.txtUPC.Name = "txtUPC";
             this.txtUPC.Size = new System.Drawing.Size(100, 23);
             this.txtUPC.TabIndex = 7;
@@ -394,6 +396,13 @@
             this.importToolStripMenuItem.Size = new System.Drawing.Size(320, 22);
             this.importToolStripMenuItem.Text = "Import...";
             this.importToolStripMenuItem.Click += new System.EventHandler(this.importToolStripMenuItem_Click);
+            // 
+            // exportToCSVToolStripMenuItem
+            // 
+            this.exportToCSVToolStripMenuItem.Name = "exportToCSVToolStripMenuItem";
+            this.exportToCSVToolStripMenuItem.Size = new System.Drawing.Size(320, 22);
+            this.exportToCSVToolStripMenuItem.Text = "Export to .CSV";
+            this.exportToCSVToolStripMenuItem.Click += new System.EventHandler(this.exportToCSVToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
@@ -463,7 +472,7 @@
             // btnGenerateUPC
             // 
             this.btnGenerateUPC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnGenerateUPC.Location = new System.Drawing.Point(1293, 403);
+            this.btnGenerateUPC.Location = new System.Drawing.Point(1291, 325);
             this.btnGenerateUPC.Name = "btnGenerateUPC";
             this.btnGenerateUPC.Size = new System.Drawing.Size(75, 23);
             this.btnGenerateUPC.TabIndex = 55;
@@ -475,7 +484,7 @@
             // 
             this.btnPrintUPC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnPrintUPC.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPrintUPC.Location = new System.Drawing.Point(1139, 466);
+            this.btnPrintUPC.Location = new System.Drawing.Point(1112, 531);
             this.btnPrintUPC.Name = "btnPrintUPC";
             this.btnPrintUPC.Size = new System.Drawing.Size(229, 34);
             this.btnPrintUPC.TabIndex = 56;
@@ -488,7 +497,7 @@
             this.chkAutoPrintLabels.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.chkAutoPrintLabels.AutoSize = true;
             this.chkAutoPrintLabels.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkAutoPrintLabels.Location = new System.Drawing.Point(1139, 437);
+            this.chkAutoPrintLabels.Location = new System.Drawing.Point(1112, 502);
             this.chkAutoPrintLabels.Name = "chkAutoPrintLabels";
             this.chkAutoPrintLabels.Size = new System.Drawing.Size(227, 23);
             this.chkAutoPrintLabels.TabIndex = 57;
@@ -516,12 +525,24 @@
             this.lblTotalItems.TabIndex = 101;
             this.lblTotalItems.Text = "label9";
             // 
-            // exportToCSVToolStripMenuItem
+            // lvUPC
             // 
-            this.exportToCSVToolStripMenuItem.Name = "exportToCSVToolStripMenuItem";
-            this.exportToCSVToolStripMenuItem.Size = new System.Drawing.Size(320, 22);
-            this.exportToCSVToolStripMenuItem.Text = "Export to .CSV";
-            this.exportToCSVToolStripMenuItem.Click += new System.EventHandler(this.exportToCSVToolStripMenuItem_Click);
+            this.lvUPC.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lvUPC.CheckBoxes = true;
+            this.lvUPC.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1});
+            this.lvUPC.Location = new System.Drawing.Point(1137, 370);
+            this.lvUPC.Name = "lvUPC";
+            this.lvUPC.Size = new System.Drawing.Size(222, 97);
+            this.lvUPC.TabIndex = 102;
+            this.lvUPC.UseCompatibleStateImageBehavior = false;
+            this.lvUPC.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "UPC";
+            this.columnHeader1.Width = 218;
             // 
             // ManageInventory
             // 
@@ -529,6 +550,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1384, 682);
+            this.Controls.Add(this.lvUPC);
             this.Controls.Add(this.lblTotalItems);
             this.Controls.Add(this.btnClearSearchBox);
             this.Controls.Add(this.chkAutoPrintLabels);
@@ -618,5 +640,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.Label lblTotalItems;
         private System.Windows.Forms.ToolStripMenuItem exportToCSVToolStripMenuItem;
+        private System.Windows.Forms.ListView lvUPC;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
     }
 }

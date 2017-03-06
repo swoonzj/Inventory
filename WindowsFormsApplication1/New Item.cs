@@ -128,7 +128,7 @@ namespace Inventory
                                     txtCredit.Text,
                                     txtUPC.Text);
 
-            item.AddToDatabase(TableNames.INVENTORY);
+            item.AddToInventory();
             MessageBox.Show("Item successfully added!",
                                     "Success!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
 

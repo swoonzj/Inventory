@@ -423,7 +423,7 @@ namespace Inventory
 
         private void addLeadingZeroesToUPCsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DBaccess.AddLeadingZeroes();
+            //DBaccess.AddLeadingZeroes();
         }
 
         private void txtInventory_TextChanged(object sender, EventArgs e)

@@ -336,21 +336,9 @@ namespace Inventory
         /// <param name="tablename">Name of table to add item</param>
         public void AddToTable(string tablename)
         {
-            string date = GetDate();
-
-            if (tablename == TableNames._30DAYHOLD)
+            foreach (Item item in items)
             {
-                foreach (Item item in items)
-                {
-                    DBaccess.AddTo30DayHold(item, date);
-                }
-            }
-            else
-            {
-                foreach (Item item in items)
-                {
-                    DBaccess.AddToTable(tablename, item);
-                }
+                item.AddToInventory(tablename);
             }
         }
 
@@ -364,13 +352,6 @@ namespace Inventory
             }
         }
 
-        public void RemoveFrom30DayHold()
-        {
-            foreach (Item item in items)
-            {
-                DBaccess.RemoveOldestItemFrom30DayHold(item);
-            }
-        }
         /// <summary>
         /// Returns the current date and time as a string
         /// </summary>

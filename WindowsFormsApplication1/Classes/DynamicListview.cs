@@ -71,7 +71,6 @@ namespace Inventory
                 listView.Columns.Add(ListViewColumnNames.QUANTITY);
                 listView.Columns.Add(ListViewColumnNames.TRADE_CASH);
                 listView.Columns.Add(ListViewColumnNames.TRADE_CREDIT);
-                listView.Columns.Add(ListViewColumnNames.UPC);
             }
 
             // For Cart screens, show only Name, System, Price, Quantity, Item Total
@@ -113,7 +112,7 @@ namespace Inventory
         {
             int tempWidth;
             listView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize); // Resize all columns based on Column title length
-            tempWidth = listView.Columns[1].Width; // Save width for comparison
+            tempWidth = listView.Columns[1].Width; // Save "System" width for comparison
             listView.Columns[0].AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent); // Then resize both Name and System columns...
             listView.Columns[1].AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent); // ...  according to largest item value
 

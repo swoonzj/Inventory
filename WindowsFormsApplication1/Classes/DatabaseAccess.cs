@@ -66,41 +66,44 @@ namespace Inventory
             return input;
         }
 
+        // UNUSED
+
         //// Add an item to the passed Tablename, 
         ////   but specifically designed for the Inventory & TemporaryInventory(when importing from CSV) tables
-        public static void AddToTable(string tblname, string name, string system, decimal price, int inventory, decimal cash, decimal credit, string upc)
-        {
+        //public static void AddToTable(string tblname, string name, string system, decimal price, int inventory, decimal cash, decimal credit, string upc)
+        //{
 
-            //  name = checkForSpecialCharacters(name);
-            //  system = checkForSpecialCharacters(system);
-            // Add data to table
-            SqlCommand cmd = new SqlCommand("INSERT INTO " + tblname + " VALUES(@NAME, @SYSTEM, @PRICE, @QUANTITY, @TRADE_CASH, @TRADE_CREDIT, @UPC)", connect);
-            cmd.Parameters.Add("@NAME", SqlDbType.VarChar).Value = name;
-            cmd.Parameters.Add("@SYSTEM", SqlDbType.VarChar).Value = system;
-            cmd.Parameters.Add("@PRICE", SqlDbType.Money).Value = price;
-            cmd.Parameters.Add("@QUANTITY", SqlDbType.Int).Value = inventory;
-            cmd.Parameters.Add("@TRADE_CASH", SqlDbType.Money).Value = cash;
-            cmd.Parameters.Add("@TRADE_CREDIT", SqlDbType.Money).Value = credit;
-            cmd.Parameters.Add("@UPC", SqlDbType.VarChar).Value = upc;
+        //    //  name = checkForSpecialCharacters(name);
+        //    //  system = checkForSpecialCharacters(system);
+        //    // Add data to table
+        //    SqlCommand cmd = new SqlCommand("INSERT INTO " + tblname + " VALUES(@NAME, @SYSTEM, @PRICE, @QUANTITY, @TRADE_CASH, @TRADE_CREDIT, @UPC)", connect);
+        //    cmd.Parameters.Add("@NAME", SqlDbType.VarChar).Value = name;
+        //    cmd.Parameters.Add("@SYSTEM", SqlDbType.VarChar).Value = system;
+        //    cmd.Parameters.Add("@PRICE", SqlDbType.Money).Value = price;
+        //    cmd.Parameters.Add("@QUANTITY", SqlDbType.Int).Value = inventory;
+        //    cmd.Parameters.Add("@TRADE_CASH", SqlDbType.Money).Value = cash;
+        //    cmd.Parameters.Add("@TRADE_CREDIT", SqlDbType.Money).Value = credit;
+        //    cmd.Parameters.Add("@UPC", SqlDbType.VarChar).Value = upc;
 
-            // execute command  & close connection
-            try
-            {
-                connect.Open();
-                cmd.ExecuteNonQuery();
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show("ERROR IN AddToTable:\n" + e.Message);
-            }
-            finally
-            {
-                connect.Close();
-            }
-        }
+        //    // execute command  & close connection
+        //    try
+        //    {
+        //        connect.Open();
+        //        cmd.ExecuteNonQuery();
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        MessageBox.Show("ERROR IN AddToTable:\n" + e.Message);
+        //    }
+        //    finally
+        //    {
+        //        connect.Close();
+        //    }
+        //}
         
-        public static void AddToTable(string tblname, Item item)
+        public static void AddToTable(Item item)
         {
+            string tblname = TableNames.INVENTORY;
             // Make sure no duplicates exist
             if (IsItemInTable(tblname, item))
             {
@@ -197,17 +200,24 @@ namespace Inventory
         }
 
         // Increase an item's inventory by adding the passed "Item.quantity" value
-        public static void IncrementInventory(string tablename, Item item)
+        public static void IncrementInventory(Item item)
         {
+            //SqlCommand cmd = new SqlCommand("UPDATE " + tablename +
+            //                                " SET Quantity = Quantity + " + item.quantity +
+            //                                " WHERE Name = '" + CheckForSpecialCharacters(item.name) +
+            //                                "' AND System = '" + CheckForSpecialCharacters(item.system) + "' " + 
+            //                                "AND PRICE = '" + item.price + "' " +
+            //                                "AND TRADECASH = '" + item.tradeCash + "' " +
+            //                                "AND TRADECREDIT = '" + item.tradeCredit + "' " +
+            //                                "AND UPC = '" + item.UPC + "'",
+            //                                connect); // Find an exact match for the passed string, increase inventory
+
+            string tablename = TableNames.INVENTORY;
+
             SqlCommand cmd = new SqlCommand("UPDATE " + tablename +
                                             " SET Quantity = Quantity + " + item.quantity +
-                                            " WHERE Name = '" + CheckForSpecialCharacters(item.name) +
-                                            "' AND System = '" + CheckForSpecialCharacters(item.system) + "' " + 
-                                            "AND PRICE = '" + item.price + "' " +
-                                            "AND TRADECASH = '" + item.tradeCash + "' " +
-                                            "AND TRADECREDIT = '" + item.tradeCredit + "' " +
-                                            "AND UPC = '" + item.UPC + "'",
-                                            connect); // Find an exact match for the passed string, increase inventory
+                                            " WHERE ID = '" + item.SQLid,
+                                            connect); // Find item by SQL ID, increase inventory
 
             try
             {
@@ -223,6 +233,41 @@ namespace Inventory
                 connect.Close();
             }
 
+        }
+
+        /// <summary>
+        /// Returns an item's unique ID from Inventory SQL table
+        /// </summary>
+        /// <param name="tablename">SQL table to search</param>
+        /// <param name="item">Item to fetch ID</param>
+        /// <returns>Item ID as a string. A value of "0" means that an error occured.</returns>
+        public static string GetItemID(Item item)
+        {
+            string tablename = TableNames.INVENTORY;
+            string id = "0";
+            // Find an exact match for the passed string, select ID
+            SqlCommand cmd = new SqlCommand("SELECT ID FROM " + tablename +
+                                            " WHERE Name = '" + CheckForSpecialCharacters(item.name) +
+                                            "' AND System = '" + CheckForSpecialCharacters(item.system) + "' " +
+                                            "AND PRICE = '" + item.price + "' " +
+                                            "AND TRADECASH = '" + item.tradeCash + "' " +
+                                            "AND TRADECREDIT = '" + item.tradeCredit + "' ",
+                                            connect);
+            try
+            {
+                connect.Open();
+                id = (string)cmd.ExecuteScalar();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("ERROR IN GetItemID:\n" + e.Message);
+            }
+            finally
+            {
+                connect.Close();
+            }
+
+            return id;
         }
 
         // Change an existing item's information
@@ -287,125 +332,210 @@ namespace Inventory
             }
 
         }
+
+        #region 30 Day Hold Methods (UNUSED)
         
-        /// <summary>
-        /// Adds an item to the SQL table "tbl30DayHold"
-        /// </summary>
-        /// <param name="item">Item to add to table</param>
-        /// <param name="date">Date of addition</param>
-        public static void AddTo30DayHold(Item item, string date)
-        {
-            // Make sure Item is not null
-            if (item == null) return;
+        ///// <summary>
+        ///// Adds an item to the SQL table "tbl30DayHold"
+        ///// </summary>
+        ///// <param name="item">Item to add to table</param>
+        ///// <param name="date">Date of addition</param>
+        //public static void AddTo30DayHold(Item item, string date)
+        //{
+        //    // Make sure Item is not null
+        //    if (item == null) return;
 
-            SqlCommand cmd = new SqlCommand("INSERT INTO " + TableNames._30DAYHOLD + " VALUES(@NAME, @SYSTEM, @PRICE, @QUANTITY, @TRADE_CASH, @TRADE_CREDIT, @UPC, @DATE)", connect);
-            cmd.Parameters.Add("@NAME", SqlDbType.VarChar).Value = item.name;
-            cmd.Parameters.Add("@SYSTEM", SqlDbType.NVarChar).Value = item.system;
-            cmd.Parameters.Add("@PRICE", SqlDbType.Money).Value = item.price;
-            cmd.Parameters.Add("@QUANTITY", SqlDbType.Int).Value = item.quantity;
-            cmd.Parameters.Add("@TRADE_CASH", SqlDbType.Money).Value = item.tradeCash;
-            cmd.Parameters.Add("@TRADE_CREDIT", SqlDbType.Money).Value = item.tradeCredit;
-            cmd.Parameters.Add("@UPC", SqlDbType.VarChar).Value = item.UPC;
-            cmd.Parameters.Add("@DATE", SqlDbType.DateTime).Value = date;
+        //    SqlCommand cmd = new SqlCommand("INSERT INTO " + TableNames._30DAYHOLD + " VALUES(@NAME, @SYSTEM, @PRICE, @QUANTITY, @TRADE_CASH, @TRADE_CREDIT, @UPC, @DATE)", connect);
+        //    cmd.Parameters.Add("@NAME", SqlDbType.VarChar).Value = item.name;
+        //    cmd.Parameters.Add("@SYSTEM", SqlDbType.NVarChar).Value = item.system;
+        //    cmd.Parameters.Add("@PRICE", SqlDbType.Money).Value = item.price;
+        //    cmd.Parameters.Add("@QUANTITY", SqlDbType.Int).Value = item.quantity;
+        //    cmd.Parameters.Add("@TRADE_CASH", SqlDbType.Money).Value = item.tradeCash;
+        //    cmd.Parameters.Add("@TRADE_CREDIT", SqlDbType.Money).Value = item.tradeCredit;
+        //    cmd.Parameters.Add("@UPC", SqlDbType.VarChar).Value = item.UPC;
+        //    cmd.Parameters.Add("@DATE", SqlDbType.DateTime).Value = date;
 
-            try
-            {
-                connect.Open();
-                cmd.ExecuteNonQuery();
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show("ERROR IN AddTo30DayHold:\n" + e.Message);
-            }
-            finally
-            {
-                connect.Close();
-            }
-        }
+        //    try
+        //    {
+        //        connect.Open();
+        //        cmd.ExecuteNonQuery();
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        MessageBox.Show("ERROR IN AddTo30DayHold:\n" + e.Message);
+        //    }
+        //    finally
+        //    {
+        //        connect.Close();
+        //    }
+        //}
 
-        public static void DeleteItemFrom30DayHold(HoldItem item)
-        {
-            SqlCommand cmd = new SqlCommand("DELETE FROM tbl30DayHold WHERE Name = '" + CheckForSpecialCharacters(item.name) +
-                                            "' AND System = '" + CheckForSpecialCharacters(item.system) + "' AND Date = '" + item.dateIn + "'",
-                                            connect); // Find an exact match for the passed string, delete item.
-            try
-            {
-                connect.Open();
-                cmd.ExecuteNonQuery();
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show("ERROR IN DeleteItemFrom30DayHold:\n" + e.Message);
-            }
-            finally
-            {
-                connect.Close();
-            }
-        }
+        //public static void DeleteItemFrom30DayHold(HoldItem item)
+        //{
+        //    SqlCommand cmd = new SqlCommand("DELETE FROM tbl30DayHold WHERE Name = '" + CheckForSpecialCharacters(item.name) +
+        //                                    "' AND System = '" + CheckForSpecialCharacters(item.system) + "' AND Date = '" + item.dateIn + "'",
+        //                                    connect); // Find an exact match for the passed string, delete item.
+        //    try
+        //    {
+        //        connect.Open();
+        //        cmd.ExecuteNonQuery();
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        MessageBox.Show("ERROR IN DeleteItemFrom30DayHold:\n" + e.Message);
+        //    }
+        //    finally
+        //    {
+        //        connect.Close();
+        //    }
+        //}
 
-        public static void Edit30DayHold(HoldItem oldItem, HoldItem newItem)
-        {
-            SqlCommand cmd = new SqlCommand("UPDATE " + TableNames._30DAYHOLD +
-                                            " SET Name = '" + CheckForSpecialCharacters(newItem.name) + "', " +
-                                            "System = '" + CheckForSpecialCharacters(newItem.system) + "', " +
-                                            "Price = " + newItem.price + ", " +
-                                            "Quantity = " + newItem.quantity + ", " +
-                                            "TradeCash = " + newItem.tradeCash + ", " +
-                                            "TradeCredit = " + newItem.tradeCredit + ", " +
-                                            "UPC = " + newItem.UPC + ", " +
-                                            "DATE = '" + newItem.dateIn + "'" +
-                                            " WHERE Name = '" + CheckForSpecialCharacters(oldItem.name) +
-                                            "' AND System = '" + CheckForSpecialCharacters(oldItem.system) + "' " +
-                                            "AND PRICE = '" + oldItem.price + "' " +
-                                            "AND TRADECASH = '" + oldItem.tradeCash + "' " +
-                                            "AND TRADECREDIT = '" + oldItem.tradeCredit + "' " +
-                                            "AND UPC = '" + oldItem.UPC + "' " +
-                                            "AND DATE = '" + oldItem.dateIn + "'"
-                                            , connect); // Find an exact match for the passed string, increase inventory
+        //public static void Edit30DayHold(HoldItem oldItem, HoldItem newItem)
+        //{
+        //    SqlCommand cmd = new SqlCommand("UPDATE " + TableNames._30DAYHOLD +
+        //                                    " SET Name = '" + CheckForSpecialCharacters(newItem.name) + "', " +
+        //                                    "System = '" + CheckForSpecialCharacters(newItem.system) + "', " +
+        //                                    "Price = " + newItem.price + ", " +
+        //                                    "Quantity = " + newItem.quantity + ", " +
+        //                                    "TradeCash = " + newItem.tradeCash + ", " +
+        //                                    "TradeCredit = " + newItem.tradeCredit + ", " +
+        //                                    "UPC = " + newItem.UPC + ", " +
+        //                                    "DATE = '" + newItem.dateIn + "'" +
+        //                                    " WHERE Name = '" + CheckForSpecialCharacters(oldItem.name) +
+        //                                    "' AND System = '" + CheckForSpecialCharacters(oldItem.system) + "' " +
+        //                                    "AND PRICE = '" + oldItem.price + "' " +
+        //                                    "AND TRADECASH = '" + oldItem.tradeCash + "' " +
+        //                                    "AND TRADECREDIT = '" + oldItem.tradeCredit + "' " +
+        //                                    "AND UPC = '" + oldItem.UPC + "' " +
+        //                                    "AND DATE = '" + oldItem.dateIn + "'"
+        //                                    , connect); // Find an exact match for the passed string, increase inventory
 
-            try
-            {
-                connect.Open();
-                cmd.ExecuteNonQuery();
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show("ERROR IN Edit30DayHold:\n" + e.Message);
-            }
-            finally
-            {
-                connect.Close();
-            }
+        //    try
+        //    {
+        //        connect.Open();
+        //        cmd.ExecuteNonQuery();
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        MessageBox.Show("ERROR IN Edit30DayHold:\n" + e.Message);
+        //    }
+        //    finally
+        //    {
+        //        connect.Close();
+        //    }
 
-        }
+        //}
 
-        public static void RemoveOldestItemFrom30DayHold(Item item)
-        {
-            int quantity = item.quantity;
+        //public static void RemoveOldestItemFrom30DayHold(Item item)
+        //{
+        //    int quantity = item.quantity;
 
-            // Get a collection of the same items from the 30 Day Hold, sorted by Date
-            Collection items = _30DayHoldToCollection("Date", true, item.UPC);
+        //    // Get a collection of the same items from the 30 Day Hold, sorted by Date
+        //    Collection items = _30DayHoldToCollection("Date", true, item.UPC);
 
-            // Deduct passed "item"'s quantity from as many Items as necessary in the 30 Day Hold Collection, until the passed Item's quantity has been fully deducted from the Hold
-            foreach (HoldItem i in items)
-            {
-                // Quantity remaining is larger than current item's quantity, delete item from Hold, and deduct its quantity from the amount remaining
-                if (i.quantity <= quantity)
-                {
-                    DeleteItemFrom30DayHold(i);
-                    quantity -= i.quantity;
-                }
+        //    // Deduct passed "item"'s quantity from as many Items as necessary in the 30 Day Hold Collection, until the passed Item's quantity has been fully deducted from the Hold
+        //    foreach (HoldItem i in items)
+        //    {
+        //        // Quantity remaining is larger than current item's quantity, delete item from Hold, and deduct its quantity from the amount remaining
+        //        if (i.quantity <= quantity)
+        //        {
+        //            DeleteItemFrom30DayHold(i);
+        //            quantity -= i.quantity;
+        //        }
 
-                // Quantity remaining is less than the current item's quantity, adjust item's quantity & update 30DayHold
-                else
-                {
-                    HoldItem newItem = i.Clone();
-                    newItem.quantity -= quantity;
-                    Edit30DayHold(i, newItem);
-                    return;
-                }
-            }
-        }
+        //        // Quantity remaining is less than the current item's quantity, adjust item's quantity & update 30DayHold
+        //        else
+        //        {
+        //            HoldItem newItem = i.Clone();
+        //            newItem.quantity -= quantity;
+        //            Edit30DayHold(i, newItem);
+        //            return;
+        //        }
+        //    }
+        //}
+    
+        
+        ///// <summary>
+        ///// Gets the 30-Day-Hold table and returns a Collection of all contained Items
+        ///// </summary>
+        ///// <param name="sortBy">Column to sort by.   (Optional)</param>
+        ///// <param name="ascending">True: Results are sorted (A->Z), False: (Z->A).  (Optional)</param>
+        ///// <param name="searchtext">Text to narrow results to items containing this text.  (Optional)</param>
+        ///// <returns>A Collection of Items</returns>
+        //public static Collection _30DayHoldToCollection(string sortBy = "System", bool ascending = true, string searchtext = "")
+        //{
+        //    Collection collection = new Collection();
+        //    HoldItem item;
+        //    SqlCommand cmd;
+
+        //    string tablename = TableNames._30DAYHOLD;
+        //    string order;            
+
+        //    // Save sorting order to string "order" (descending/ascending)
+        //    if (ascending)
+        //        order = "ASC";
+        //    else
+        //        order = "DESC";
+
+        //    searchtext = CheckForSpecialCharacters(searchtext);
+
+        //    if (sortBy != "Name")
+        //    {
+        //        cmd = new SqlCommand("SELECT * FROM " + tablename +
+        //           " WHERE name LIKE \'%" + searchtext + "%\' OR system LIKE \'%" + searchtext + "%\' OR UPC = '" + searchtext + "'" +
+        //           " ORDER BY " + sortBy + " " + order + ", NAME;", connect);
+        //    }
+        //    else
+        //    {
+        //        cmd = new SqlCommand("SELECT * FROM " + tablename +
+        //           " WHERE name LIKE \'%" + searchtext + "%\' OR system LIKE \'%" + searchtext + "%\' " +
+        //           "ORDER BY " + sortBy + " " + order + ";", connect);
+        //    }
+
+        //    try
+        //    {
+        //        connect.Open();
+        //        SqlDataReader reader = cmd.ExecuteReader();
+
+        //        while (reader.Read() == true)
+        //        {
+        //            item = SQLReaderToHoldItem(reader);
+        //            if (item != null)
+        //                collection.AddItem(item);
+        //        }
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        MessageBox.Show("ERROR IN _30DayHoldToCollection:\n" + e.Message);
+        //    }
+        //    finally
+        //    {
+        //        connect.Close();
+        //    }
+
+        //    return collection;
+        //}
+
+        ///// <summary>
+        ///// Creates a HoldItem based on data contained in an SqlDataReader
+        ///// </summary>
+        ///// <param name="reader">SqlDataReader containing data</param>
+        ///// <returns>A populated HoldItem</returns>
+        //public static HoldItem SQLReaderToHoldItem(SqlDataReader reader)
+        //{
+        //    HoldItem item = null;
+        //    item = new HoldItem(reader[0].ToString(),
+        //            reader[1].ToString(),
+        //            reader[2].ToString(),
+        //            reader[3].ToString(),
+        //            reader[4].ToString(),
+        //            reader[5].ToString(),
+        //            reader[6].ToString(),
+        //            reader[7].ToString());
+        //    return item;
+        //}
+
+        #endregion
 
         /// <summary>
         /// Gets an INVENTORY table and returns a Collection of all contained Items
@@ -552,99 +682,40 @@ namespace Inventory
         /// <summary>
         /// Adds leading zeroes to UPCs > 7 characters in length, and adds leading zeroes to make a 12 digit number 
         /// </summary>
-        public static void AddLeadingZeroes()
-        {
-            // Strategy:
-            // *1. Get entire Inventory table as a collection
-            // *2. If UPC length is > 8, < 12, add leading zeroes to UPC
-            // *3. Edit
+        //public static void AddLeadingZeroes()
+        //{
+        //    // Strategy:
+        //    // *1. Get entire Inventory table as a collection
+        //    // *2. If UPC length is > 8, < 12, add leading zeroes to UPC
+        //    // *3. Edit
 
 
-            // 1.
-            Collection collection = DBaccess.SQLTableToCollection(TableNames.INVENTORY);
+        //    // 1.
+        //    Collection collection = DBaccess.SQLTableToCollection(TableNames.INVENTORY);
 
-            // 2.
-            foreach (Item item in collection)
-            {
-                Item newItem = null;
-                string zeroes = "";
-                int len = item.UPC.Length;
+        //    // 2.
+        //    foreach (Item item in collection)
+        //    {
+        //        Item newItem = null;
+        //        string zeroes = "";
+        //        int len = item.UPC.c;
 
-                if (len < 12 && len >= 8)
-                {
-                    newItem = item.Clone();
-                    for (int i = 0; i < (12 - len); i++)
-                    {
-                        zeroes += '0';
-                    }
-                    newItem.UPC = zeroes + newItem.UPC;
+        //        if (len < 12 && len >= 8)
+        //        {
+        //            newItem = item.Clone();
+        //            for (int i = 0; i < (12 - len); i++)
+        //            {
+        //                zeroes += '0';
+        //            }
+        //            newItem.UPC = zeroes + newItem.UPC;
 
-             // 3.
-                    DBaccess.EditInventory(TableNames.INVENTORY, item, newItem);
-                }
-            }
-        }
+        //     // 3.
+        //            DBaccess.EditInventory(TableNames.INVENTORY, item, newItem);
+        //        }
+        //    }
+        //}
 
-        /// <summary>
-        /// Gets the 30-Day-Hold table and returns a Collection of all contained Items
-        /// </summary>
-        /// <param name="sortBy">Column to sort by.   (Optional)</param>
-        /// <param name="ascending">True: Results are sorted (A->Z), False: (Z->A).  (Optional)</param>
-        /// <param name="searchtext">Text to narrow results to items containing this text.  (Optional)</param>
-        /// <returns>A Collection of Items</returns>
-        public static Collection _30DayHoldToCollection(string sortBy = "System", bool ascending = true, string searchtext = "")
-        {
-            Collection collection = new Collection();
-            HoldItem item;
-            SqlCommand cmd;
-
-            string tablename = TableNames._30DAYHOLD;
-            string order;            
-
-            // Save sorting order to string "order" (descending/ascending)
-            if (ascending)
-                order = "ASC";
-            else
-                order = "DESC";
-
-            searchtext = CheckForSpecialCharacters(searchtext);
-
-            if (sortBy != "Name")
-            {
-                cmd = new SqlCommand("SELECT * FROM " + tablename +
-                   " WHERE name LIKE \'%" + searchtext + "%\' OR system LIKE \'%" + searchtext + "%\' OR UPC = '" + searchtext + "'" +
-                   " ORDER BY " + sortBy + " " + order + ", NAME;", connect);
-            }
-            else
-            {
-                cmd = new SqlCommand("SELECT * FROM " + tablename +
-                   " WHERE name LIKE \'%" + searchtext + "%\' OR system LIKE \'%" + searchtext + "%\' " +
-                   "ORDER BY " + sortBy + " " + order + ";", connect);
-            }
-
-            try
-            {
-                connect.Open();
-                SqlDataReader reader = cmd.ExecuteReader();
-
-                while (reader.Read() == true)
-                {
-                    item = SQLReaderToHoldItem(reader);
-                    if (item != null)
-                        collection.AddItem(item);
-                }
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show("ERROR IN _30DayHoldToCollection:\n" + e.Message);
-            }
-            finally
-            {
-                connect.Close();
-            }
-
-            return collection;
-        }
+        
         
         public static Collection TransactionTableToCollection(string sortBy = "TransactionNumber", bool ascending = true)
         {
@@ -737,25 +808,7 @@ namespace Inventory
             return item;
         }
 
-        /// <summary>
-        /// Creates a HoldItem based on data contained in an SqlDataReader
-        /// </summary>
-        /// <param name="reader">SqlDataReader containing data</param>
-        /// <returns>A populated HoldItem</returns>
-        public static HoldItem SQLReaderToHoldItem(SqlDataReader reader)
-        {
-            HoldItem item = null;
-            item = new HoldItem(reader[0].ToString(),
-                    reader[1].ToString(),
-                    reader[2].ToString(),
-                    reader[3].ToString(),
-                    reader[4].ToString(),
-                    reader[5].ToString(),
-                    reader[6].ToString(),
-                    reader[7].ToString());
-            return item;
-        }
-
+        
         /// <summary>
         /// Creates a TransactionItem based on data contained in an SqlDataReader
         /// </summary>
@@ -1143,7 +1196,7 @@ namespace Inventory
             string command;
 
             // If UPC isn't 0, find a match based on UPC. Otherwise find match based on Name and System.
-            if (item.UPC != "0")
+            if (item.UPC[0] != "0")
             {
                 command = "SELECT QUANTITY FROM " + TableNames.INVENTORY + " WHERE UPC = '" + item.UPC + "'";
             }
