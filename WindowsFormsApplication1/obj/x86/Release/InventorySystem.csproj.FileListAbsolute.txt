@@ -22,3 +22,28 @@ C:\Users\Zj\Documents\Programming\C# Tutorials\1\WindowsFormsApplication1\Window
 C:\Users\Zj\Documents\Programming\C# Tutorials\1\WindowsFormsApplication1\WindowsFormsApplication1\obj\x86\Release\Inventory.UnknownUPCHandler.resources
 C:\Users\Zj\Documents\Programming\C# Tutorials\1\WindowsFormsApplication1\WindowsFormsApplication1\obj\x86\Release\Inventory.ImportItems.resources
 C:\Users\Zj\Documents\Programming\C# Tutorials\1\WindowsFormsApplication1\WindowsFormsApplication1\obj\x86\Release\Inventory.LargeInventoryMode.resources
+C:\Users\CoreGaming\Documents\Programming\Inventory\WindowsFormsApplication1\bin\Release\Inventory.exe.config
+C:\Users\CoreGaming\Documents\Programming\Inventory\WindowsFormsApplication1\obj\x86\Release\Inventory.exe
+C:\Users\CoreGaming\Documents\Programming\Inventory\WindowsFormsApplication1\obj\x86\Release\Inventory.pdb
+C:\Users\CoreGaming\Documents\Programming\Inventory\WindowsFormsApplication1\obj\x86\Release\InventorySystem.csprojResolveAssemblyReference.cache
+C:\Users\CoreGaming\Documents\Programming\Inventory\WindowsFormsApplication1\obj\x86\Release\Inventory._30DayHold.resources
+C:\Users\CoreGaming\Documents\Programming\Inventory\WindowsFormsApplication1\obj\x86\Release\Inventory.EditTradeCart.resources
+C:\Users\CoreGaming\Documents\Programming\Inventory\WindowsFormsApplication1\obj\x86\Release\Inventory.ImportItems.resources
+C:\Users\CoreGaming\Documents\Programming\Inventory\WindowsFormsApplication1\obj\x86\Release\Inventory.LargeInventoryMode.resources
+C:\Users\CoreGaming\Documents\Programming\Inventory\WindowsFormsApplication1\obj\x86\Release\Inventory.ManageInventory.resources
+C:\Users\CoreGaming\Documents\Programming\Inventory\WindowsFormsApplication1\obj\x86\Release\Inventory.EditCart.resources
+C:\Users\CoreGaming\Documents\Programming\Inventory\WindowsFormsApplication1\obj\x86\Release\Inventory.FormatCSV.resources
+C:\Users\CoreGaming\Documents\Programming\Inventory\WindowsFormsApplication1\obj\x86\Release\Inventory.NewItem.resources
+C:\Users\CoreGaming\Documents\Programming\Inventory\WindowsFormsApplication1\obj\x86\Release\Inventory.POSinventory.resources
+C:\Users\CoreGaming\Documents\Programming\Inventory\WindowsFormsApplication1\obj\x86\Release\Inventory.Properties.Resources.resources
+C:\Users\CoreGaming\Documents\Programming\Inventory\WindowsFormsApplication1\obj\x86\Release\Inventory.UnknownUPCHandler.resources
+C:\Users\CoreGaming\Documents\Programming\Inventory\WindowsFormsApplication1\obj\x86\Release\Inventory.View_Transactions.resources
+C:\Users\CoreGaming\Documents\Programming\Inventory\WindowsFormsApplication1\obj\x86\Release\InventorySystem.csproj.GenerateResource.Cache
+C:\Users\CoreGaming\Documents\Programming\Inventory\WindowsFormsApplication1\bin\Release\Resources\BlackFire.wav
+C:\Users\CoreGaming\Documents\Programming\Inventory\WindowsFormsApplication1\bin\Release\Resources\shaq2.ico
+C:\Users\CoreGaming\Documents\Programming\Inventory\WindowsFormsApplication1\bin\Release\Resources\WelcomeBack.wav
+C:\Users\CoreGaming\Documents\Programming\Inventory\WindowsFormsApplication1\bin\Release\Resources\StoreDatabase.mdf
+C:\Users\CoreGaming\Documents\Programming\Inventory\WindowsFormsApplication1\bin\Release\Resources\StoreDatabase_log.LDF
+C:\Users\CoreGaming\Documents\Programming\Inventory\WindowsFormsApplication1\bin\Release\Inventory.exe
+C:\Users\CoreGaming\Documents\Programming\Inventory\WindowsFormsApplication1\bin\Release\Inventory.pdb
+C:\Users\CoreGaming\Documents\Programming\Inventory\WindowsFormsApplication1\obj\x86\Release\Inventory.MultipleUPCSelector.resources

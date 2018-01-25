@@ -11,7 +11,9 @@ namespace Inventory
     public static class DBaccess
     {
         //static SqlConnection connect = new SqlConnection(Properties.Settings.Default.StoreDatabaseConnectionString); // For final version (store version)
-        static SqlConnection connect = new SqlConnection(Properties.Settings.Default.StoreDatabaseConnectionString2); // For testing
+        //static SqlConnection connect = new SqlConnection(Properties.Settings.Default.StoreDatabaseConnectionString2); // For testing
+        //static SqlConnection connect = new SqlConnection(Properties.Settings.Default.StoreDatabaseConnectionString3);
+        static SqlConnection connect = new SqlConnection(Properties.Settings.Default.SQLServerConnectionString);
 
         // Export table to Comma Separated Values file (.csv)
         public static void ExportCSV(string filepath, string tblname)
@@ -806,7 +808,38 @@ namespace Inventory
             }
 
             return item;
-        }        
+        }
+
+        public static Collection GetCollectionWithUPC(string tablename, string UPC)
+        {
+            Collection collection = new Collection();
+
+            SqlCommand cmd = new SqlCommand("SELECT * FROM " + tablename + " WHERE (UPC LIKE \'" + UPC + "\')", connect);
+
+            try
+            {
+                connect.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.HasRows)
+                {
+                    if (reader.Read())
+                    {
+                        collection.AddItem(SQLReaderToItem(reader));
+                    }
+                    else break;
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("ERROR IN GetCollectionWithUPC:\n" + e.Message + e.Data);
+            }
+            finally
+            {
+                connect.Close();
+            }
+
+            return collection;
+        }  
 
         /// <summary>
         /// Gets the next unused UPC value

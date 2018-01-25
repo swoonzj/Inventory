@@ -219,7 +219,16 @@ namespace Inventory
         {   // Save changes to item, refresh listview
             float result;
             int intResult;
+            int topItemIndex = 0;
             //double doubleResult;
+
+            //Save position of top item
+            try
+            {
+                topItemIndex = lvResults.TopItem.Index;
+            }
+            catch { }
+
 
             // Save Edit Changes  to the checked items 
             foreach (ListViewItem item in lvResults.CheckedItems)
@@ -325,6 +334,8 @@ namespace Inventory
 
             clearTextBoxes();
             populateList();
+            //set scroll position to last view
+            lvResults.Items[topItemIndex].EnsureVisible();
         }
 
 

@@ -223,6 +223,7 @@ namespace Inventory
 
             if (listViewType != ListViewType._30DAYHOLD && listViewType != ListViewType.TRANSACTION)
             {
+                lv.BeginUpdate(); // Prevents ListView from drawing after each item is added
                 foreach (Item item in items)
                 {
                     // Hide items that are out of stock, if desired
@@ -289,27 +290,28 @@ namespace Inventory
 
                     }
                 }
+                lv.EndUpdate(); 
             }
 
-            else if (listViewType == ListViewType._30DAYHOLD)
-            {
-                foreach (HoldItem item in items)
-                {
-                    ListViewItem lvItem = new ListViewItem(item.name); //Name
-                    lvItem.SubItems.Add(item.system);
-                    lvItem.SubItems.Add(item.price.ToString("C"));
-                    lvItem.SubItems.Add(item.quantity.ToString());
-                    lvItem.SubItems.Add(item.tradeCash.ToString("C"));
-                    lvItem.SubItems.Add(item.tradeCredit.ToString("C"));
-                    lvItem.SubItems.Add(item.UPC.ToString());
-                    lvItem.SubItems.Add(item.dateIn.ToString());
-                    lvItem.SubItems.Add(item.dateOut.ToString());
+            //else if (listViewType == ListViewType._30DAYHOLD)
+            //{
+            //    foreach (HoldItem item in items)
+            //    {
+            //        ListViewItem lvItem = new ListViewItem(item.name); //Name
+            //        lvItem.SubItems.Add(item.system);
+            //        lvItem.SubItems.Add(item.price.ToString("C"));
+            //        lvItem.SubItems.Add(item.quantity.ToString());
+            //        lvItem.SubItems.Add(item.tradeCash.ToString("C"));
+            //        lvItem.SubItems.Add(item.tradeCredit.ToString("C"));
+            //        lvItem.SubItems.Add(item.UPC.ToString());
+            //        lvItem.SubItems.Add(item.dateIn.ToString());
+            //        lvItem.SubItems.Add(item.dateOut.ToString());
 
-                    // Tag/associate listview item with inventory item
-                    lvItem.Tag = item;
-                    lv.Items.Add(lvItem);
-                }
-            }
+            //        // Tag/associate listview item with inventory item
+            //        lvItem.Tag = item;
+            //        lv.Items.Add(lvItem);
+            //    }
+            //}
 
             else if (listViewType == ListViewType.TRANSACTION)
             {
@@ -329,7 +331,7 @@ namespace Inventory
                 }
             }
         }
-
+       
         /// <summary>
         /// Adds the collection to an inventory table.
         /// </summary>

@@ -18,5 +18,20 @@
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
       <Value Profile="(Default)">Data Source=.\SQLEXPRESS;AttachDbFilename=|DataDirectory|\StoreDatabase.mdf;Integrated Security=True;User Instance=False</Value>
     </Setting>
+    <Setting Name="StoreDatabaseConnectionString3" Type="(Connection string)" Scope="Application">
+      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;ConnectionString&gt;Data Source=TRADERJOE\SQLEXPRESS;Initial Catalog="C:\PROGRAM FILES (X86)\INVENTORY\STOREDATABASE.MDF";Integrated Security=SSPI&lt;/ConnectionString&gt;
+&lt;/SerializableConnectionString&gt;</DesignTimeValue>
+      <Value Profile="(Default)">Data Source=TRADERJOE\SQLEXPRESS;Initial Catalog="C:\PROGRAM FILES (X86)\INVENTORY\STOREDATABASE.MDF";Integrated Security=SSPI</Value>
+    </Setting>
+    <Setting Name="SQLServerConnectionString" Type="(Connection string)" Scope="Application">
+      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;ConnectionString&gt;Data Source=tcp:TRADERJOE\SQLEXPRESS,49172;Initial Catalog="C:\PROGRAM FILES (X86)\INVENTORY\STOREDATABASE.MDF";Persist Security Info=True;User ID=changethis;Password=changethis&lt;/ConnectionString&gt;
+  &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
+&lt;/SerializableConnectionString&gt;</DesignTimeValue>
+      <Value Profile="(Default)">Data Source=tcp:TRADERJOE\SQLEXPRESS,49172;Initial Catalog="C:\PROGRAM FILES (X86)\INVENTORY\STOREDATABASE.MDF";Persist Security Info=True;User ID=changethis;Password=changethis</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

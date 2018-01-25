@@ -58,11 +58,32 @@ namespace Inventory
         /// <param name="UPC">A string containing the UPC value</param>
         public void AddItemFromUPC(string tablename, string UPC)
         {
-            Item item = DBaccess.GetItemWithUPC(tablename, UPC);
-            if (item != null)
-                AddItem(item);
-            else
-                MessageBox.Show("Error: This UPC is unknown", "Item not recognized", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            //Item item = DBaccess.GetItemWithUPC(tablename, UPC);
+            //if (item != null)
+            //    AddItem(item);
+            //else
+            //    MessageBox.Show("Error: This UPC is unknown", "Item not recognized", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+            Collection collection = DBaccess.GetCollectionWithUPC(tablename, UPC);
+            if (collection != null)
+            {
+               if (collection.Count() == 1)
+               {
+                   AddItem((Item)collection.items[0]);
+               }
+               else
+               {
+                   Item item = null;
+                   var form = new MultipleUPCSelector(collection);
+                   var result = form.ShowDialog();
+                   if (result == DialogResult.OK)
+                   {
+                       item = form.selectedItem;
+                       AddItem(item);
+                   }
+               }
+
+            }
         }
 
         /// <summary>

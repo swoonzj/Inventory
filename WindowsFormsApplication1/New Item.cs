@@ -114,9 +114,11 @@ namespace Inventory
             if (txtUPC.Text != "0" && DBaccess.IsUPCInUse(txtUPC.Text))
             {
                 Item tempItem = DBaccess.GetItemWithUPC(TableNames.INVENTORY, txtUPC.Text);
-                MessageBox.Show("Error: The UPC number \'" + txtUPC.Text + "\' is already in use by: \n" + tempItem.name + "\nSystem: " + tempItem.system,
-                                    "UPC Already Used", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return;
+                // Prompt user otherwise (in case the name or system is changing)
+                DialogResult yesno = MessageBox.Show("Warning: This UPC number is currently in use by this item:\n" + tempItem.name + "\nSystem: " + tempItem.system + "\nProceed?", "UPC Currently In Use", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+
+                if (yesno == DialogResult.No)
+                    return;
             }
 
             // Input is valid, add to Inventory Database

@@ -19,23 +19,21 @@ namespace Inventory
         [STAThread]
 
 
-        
+
 
 
         static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-
-
+            
             System.Media.SoundPlayer player = new System.Media.SoundPlayer(@".\WelcomeBack.wav");
             player.Play();
 
             Application.Run(new POSinventory());
             //Application.Run(new ManageInventory());
+
         }
-
-
     }
 }
      

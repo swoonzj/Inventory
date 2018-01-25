@@ -183,8 +183,6 @@
             // chkHideZero
             // 
             this.chkHideZero.AutoSize = true;
-            this.chkHideZero.Checked = true;
-            this.chkHideZero.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkHideZero.Location = new System.Drawing.Point(12, 75);
             this.chkHideZero.Name = "chkHideZero";
             this.chkHideZero.Size = new System.Drawing.Size(174, 17);
@@ -542,7 +540,7 @@
             // 
             this.printUPCLabelsAfterTradeTransactionToolStripMenuItem.CheckOnClick = true;
             this.printUPCLabelsAfterTradeTransactionToolStripMenuItem.Name = "printUPCLabelsAfterTradeTransactionToolStripMenuItem";
-            this.printUPCLabelsAfterTradeTransactionToolStripMenuItem.Size = new System.Drawing.Size(288, 22);
+            this.printUPCLabelsAfterTradeTransactionToolStripMenuItem.Size = new System.Drawing.Size(286, 22);
             this.printUPCLabelsAfterTradeTransactionToolStripMenuItem.Text = "Print UPC Labels After Trade Transaction";
             this.printUPCLabelsAfterTradeTransactionToolStripMenuItem.Click += new System.EventHandler(this.printUPCLabelsAfterTradeTransactionToolStripMenuItem_Click);
             // 

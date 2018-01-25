@@ -106,7 +106,7 @@
             // 
             // btnClearSearchBox
             // 
-            this.btnClearSearchBox.Font = new System.Drawing.Font("San Diego", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClearSearchBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClearSearchBox.Location = new System.Drawing.Point(123, 5);
             this.btnClearSearchBox.Name = "btnClearSearchBox";
             this.btnClearSearchBox.Size = new System.Drawing.Size(18, 26);
@@ -142,7 +142,7 @@
             this.btnAssign.Name = "btnAssign";
             this.btnAssign.Size = new System.Drawing.Size(129, 47);
             this.btnAssign.TabIndex = 104;
-            this.btnAssign.Text = "Assign";
+            this.btnAssign.Text = "Select";
             this.btnAssign.UseVisualStyleBackColor = true;
             this.btnAssign.Click += new System.EventHandler(this.btnAssign_Click);
             // 
