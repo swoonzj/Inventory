@@ -25,7 +25,7 @@ namespace Inventory
             RestoreItemCheckedHandler(); // Restore ItemChecked Event handler.
 
             // Update "Total Items" label
-            lblTotalItems.Text = "Total Items: " + DBaccess.GetItemTotal().ToString();
+            lblTotalItems.Text = "Total Items: " + dListView.listView.Items.Count;
         }
         
         // Fill in ListView with entire Inventory table
@@ -40,7 +40,7 @@ namespace Inventory
             RestoreItemCheckedHandler();
 
             // Update "Total Items" label
-            lblTotalItems.Text = "Total Items: " + dListView.inventory.Count();
+            lblTotalItems.Text = "Total Items: " + dListView.listView.Items.Count;
         }
 
         /// <summary>
@@ -148,7 +148,9 @@ namespace Inventory
         private void lvResults_ItemChecked(object sender, ItemCheckedEventArgs e)
         {   // When an item is checked, edit what is displayed in the textboxes.
             // If multiple items are checked, do not allow the "Name" textbox to be changed. 
-            if (lvResults.CheckedItems.Count == 0)
+            int count = lvResults.CheckedItems.Count;
+            if (count > 2) return;
+            if (count == 0)
             {
                 clearTextBoxes();
                 txtName.Enabled = true;
@@ -156,7 +158,7 @@ namespace Inventory
                 chkAutoPrintLabels.Checked = false;
             }
 
-            if (lvResults.CheckedItems.Count == 1)
+            if (count == 1)
             {   // If only one item is checked, show all info for that item
 
                 // Make sure Name textbox is enabled
@@ -182,7 +184,7 @@ namespace Inventory
                     chkAutoPrintLabels.Checked = false;
             }
 
-            if (lvResults.CheckedItems.Count > 1)
+            if (count == 2)
             {   // If multiple items are checked, 
                 // do not allow changing of Names or UPC (to prevent errors with duplication in SQL).
                 // Display only identical data in textboxes.
@@ -196,9 +198,11 @@ namespace Inventory
                 txtUPC.Text = null;
 
                 // Only display values for identical values
-                CompareCheckedItemsAndUpdateTextBoxes();
+                //CompareCheckedItemsAndUpdateTextBoxes();
+
+                //Clear all text boxes
+                clearTextBoxes();
             }
-            
         }
 
         private void clearTextBoxes()

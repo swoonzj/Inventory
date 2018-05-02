@@ -213,10 +213,12 @@ namespace Inventory
         /// <param name="listViewType">ListViewType indicating the column headers which are used</param>
         public void PopulateListView(ListView lv, bool hideOutOfStock, int listViewType, string searchText = "")
         {
+            int searchCount;
+
             // searchText cannot be null
             if (searchText == null) searchText = "";
             SearchTerms searchTerms = new SearchTerms(searchText);
-            int searchCount;
+            
 
             // Clear list
             lv.Items.Clear();

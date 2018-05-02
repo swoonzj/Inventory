@@ -67,22 +67,23 @@ namespace Inventory
             Collection collection = DBaccess.GetCollectionWithUPC(tablename, UPC);
             if (collection != null)
             {
-               if (collection.Count() == 1)
-               {
-                   AddItem((Item)collection.items[0]);
-               }
-               else
-               {
-                   Item item = null;
-                   var form = new MultipleUPCSelector(collection);
-                   var result = form.ShowDialog();
-                   if (result == DialogResult.OK)
-                   {
-                       item = form.selectedItem;
-                       AddItem(item);
-                   }
-               }
-
+                if (collection.Count() == 0) 
+                    MessageBox.Show("Error: This UPC is unknown", "Item not recognized", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                else if (collection.Count() == 1)
+                {
+                    AddItem((Item)collection.items[0]);
+                }
+                else
+                {
+                    Item item = null;
+                    var form = new MultipleUPCSelector(collection);
+                    var result = form.ShowDialog();
+                    if (result == DialogResult.OK)
+                    {
+                        item = form.selectedItem;
+                        AddItem(item);
+                    }
+                }
             }
         }
 
@@ -184,7 +185,7 @@ namespace Inventory
             }
         }
 
-        public void Trade(string type)
+        public void Trade(TransactionTypes type)
         {
             int transactionNumber = DBaccess.GetNextUnusedTransactionNumber();
             string date = GetDate();
@@ -196,7 +197,7 @@ namespace Inventory
             foreach (Item item in items)
             {
                 //DBaccess.IncrementInventory(TableNames.INVENTORY, item);
-                DBaccess.AddToTransactionTable(TableNames.TRANSACTION, item, type, transactionNumber, date);
+                DBaccess.AddToTransactionTable(TableNames.TRANSACTION, item, type.ToString(), transactionNumber, date);
             }
 
             // Clear item Collection

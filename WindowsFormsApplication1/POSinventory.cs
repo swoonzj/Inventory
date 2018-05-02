@@ -43,7 +43,6 @@ namespace Inventory
             // Instantiate Carts
             cart = new Cart(lvCart, ListViewType.CART);
             tradeCart = new TradeCart (lvTradeCart, ListViewType.TRADECART);
-
             
             //load inventory into ListView
             PopulateLists();

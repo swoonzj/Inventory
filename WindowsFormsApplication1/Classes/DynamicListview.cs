@@ -112,6 +112,7 @@ namespace Inventory
         public void AutoSetColumnWidth()
         {
             int tempWidth;
+            listView.BeginUpdate();
             listView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize); // Resize all columns based on Column title length
             tempWidth = listView.Columns[1].Width; // Save width for comparison
             listView.Columns[0].AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent); // Then resize both Name and System columns...
@@ -120,6 +121,8 @@ namespace Inventory
             // If system column width is smaller than the title "system", then auto-fit the column to HeaderSize
             if (listView.Columns[1].Width < tempWidth)
                 listView.Columns[1].AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
+
+            listView.EndUpdate();
         }
 
         public void PopulateList()
@@ -133,12 +136,14 @@ namespace Inventory
 
             // Update Inventory List
             inventory = DBaccess.SQLTableToCollection(sourceTable, sortBy, ascendingOrder, searchText);
-
+            // Disable Drawing (for speed)
+            listView.BeginUpdate();
             // Populate listview
-            inventory.PopulateListView(listView, hideOutOfStock, lvType, searchText);
-
+            inventory.PopulateListView(listView, hideOutOfStock, lvType, searchText);            
             // Adjust column widths
             AutoSetColumnWidth();
+            //Allow Drawing
+            listView.EndUpdate();
         }
 
         /// <summary>
